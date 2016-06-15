@@ -1,3 +1,6 @@
 Esta es mi nueva actualizacion
+<<<<<<< HEAD
 Esta es la actualizacion mas nueva
 Modificacion
+=======
+>>>>>>> 57339b32ae4bca7b5644ffb7301d230bc09693a8
