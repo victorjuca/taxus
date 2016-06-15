@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 ﻿Esta es mi nueva actualizacion
 Esta es una actualización realizada desde la pagina web de GitHub.
 Actualización.
+=======
+Esta es mi nueva actualizacion
+Esta es una actualización realizada desde la pagina web de GitHub.
+>>>>>>> 08cda4cbfb86c7113815c089c189aee57c9a34a4
