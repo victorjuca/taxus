@@ -4,8 +4,13 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
+<<<<<<< HEAD
     "hash": "e8f1dc0a9366aee63d5907b188416403",
     "content-hash": "739afea5eb35945b1a7a769d913bc67d",
+=======
+    "hash": "55e0189572197de0b563540cd8aae6d3",
+    "content-hash": "5bd58fd976f1ee3e9611bc37c006ec46",
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
     "packages": [
         {
             "name": "classpreloader/classpreloader",
@@ -218,6 +223,7 @@
             "time": "2015-11-06 14:35:42"
         },
         {
+<<<<<<< HEAD
             "name": "hoa/core",
             "version": "2.15.11.09",
             "source": {
@@ -529,6 +535,8 @@
             "time": "2015-08-05 08:08:21"
         },
         {
+=======
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
             "name": "jakub-onderka/php-console-color",
             "version": "0.1",
             "source": {
@@ -803,6 +811,7 @@
             "time": "2016-06-14 01:20:12"
         },
         {
+<<<<<<< HEAD
             "name": "laravelcollective/html",
             "version": "v5.1.9",
             "source": {
@@ -853,6 +862,8 @@
             "time": "2015-11-28 08:27:09"
         },
         {
+=======
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
             "name": "league/flysystem",
             "version": "1.0.24",
             "source": {

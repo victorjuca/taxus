@@ -39,7 +39,11 @@ return [
     |
     */
 
+<<<<<<< HEAD
     'timezone' => 'America/Mexico_City',
+=======
+    'timezone' => 'UTC',
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
 
     /*
     |--------------------------------------------------------------------------
@@ -136,7 +140,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+<<<<<<< HEAD
         Collective\Html\HtmlServiceProvider::class,
+=======
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
 
         /*
          * Application Service Providers...
@@ -193,8 +200,11 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+<<<<<<< HEAD
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,        
+=======
+>>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
 
     ],
 
