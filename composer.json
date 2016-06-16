@@ -5,14 +5,9 @@
     "license": "MIT",
     "type": "project",
     "require": {
-        "php": ">=5.5.9",
-<<<<<<< HEAD
         "laravel/framework": "5.1.*",
         "hoa/websocket": "~2.0",
         "laravelcollective/html": "5.1.*"
-=======
-        "laravel/framework": "5.1.*"
->>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -51,10 +46,5 @@
     },
     "config": {
         "preferred-install": "dist"
-<<<<<<< HEAD
     }   
-
-=======
-    }
->>>>>>> 1b0390ec326201fadd676c4a1788d1b29d0c5d2d
 }
