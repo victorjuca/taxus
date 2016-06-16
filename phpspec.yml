@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Taxuz
+        psr4_prefix: Taxuz
+        src_path: app
