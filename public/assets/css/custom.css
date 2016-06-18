@@ -63,7 +63,7 @@ p {
    DASHBOARD STYLES    
     =============================================*/
 .panel-back {
-    background-color:#F8F8F8;
+    background-color:#C7CDC9;
 
 }
    .noti-box {
@@ -167,7 +167,7 @@ line-height: 30px;
 }
      /*CHAT PANEL*/
  .chat-panel .panel-body {
-height: 450px;
+height: 800px;
 overflow-y: scroll;
 }
  .chat-box {
