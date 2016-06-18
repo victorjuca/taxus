@@ -17,6 +17,7 @@
                         <div class="panel-heading">
                             Hover Rows
                         </div>
+                        
                         <div class="panel-body">
                             <div class="table-responsive">
                                 <table class="table table-striped">
@@ -24,17 +25,19 @@
                                         <tr>
                                             <th>ID</th>
                                             <th>Nombre</th>
-                                            <th>Link</th>
-                                            <th>Acción</th>
+                                            <th></th>
+                                            <th></th>
+                                            <th></th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>1456</td>
                                             <td>XV AñosAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</td>
+                                            <td><a href="http://www.w3schools.com/html/">Admin</a></td>                                           
                                             <td><a href="http://www.w3schools.com/html/" target="_blank">Ver</a></td>                                           
                                             <td>
-                    
+                    <a href="#" class="btn btn-primary">Actualizar</a>
                     <a href="#" class="btn btn-danger">Eliminar</a>                                           	
                                             </td>                                            
                                         </tr>
