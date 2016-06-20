@@ -39,7 +39,7 @@ font-size: 16px;"> Last access : 30 May 2014 &nbsp; <a href="#" class="btn btn-d
 				
 					
                     <li>
-                        <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> Evento</a>
+                        <a  href="/evento"><i class="fa fa-dashboard fa-3x"></i> Evento</a>
                     </li>
                       <li>
                         <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> Palabras</a>

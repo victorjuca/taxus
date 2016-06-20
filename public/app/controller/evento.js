@@ -21,6 +21,9 @@ app.controller('eventoAdmonController', ['$scope', function($scope) {
 		$('#myModal').modal('show');
 	}
 	$scope.modalActualizaMensaje = function() {
-		$('#modalMensaje').modal('show');
+		$('#modalActualizaMensaje').modal('show');
 	}
+	$scope.modalEliminarMensaje = function() {
+		$('#modalEliminarMensaje').modal('show');
+	}	
 }]);
