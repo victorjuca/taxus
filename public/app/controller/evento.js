@@ -17,5 +17,10 @@ app.controller('eventoCRUDController', ['$scope', function($scope) {
 
 app.controller('eventoAdmonController', ['$scope', function($scope) {
 
-
+	$scope.lanzamodal = function() {
+		$('#myModal').modal('show');
+	}
+	$scope.modalActualizaMensaje = function() {
+		$('#modalMensaje').modal('show');
+	}
 }]);
