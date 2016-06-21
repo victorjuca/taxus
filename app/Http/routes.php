@@ -15,3 +15,5 @@ Route::get('/', function () {
     return view('index');
 });
 Route::resource('evento', 'EventoController');
+Route::get('login', 'UsuarioController@vistalogin');
+Route::get('crearusuario', 'UsuarioController@vistacrearusuario');
