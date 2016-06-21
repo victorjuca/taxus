@@ -38,15 +38,7 @@
                             <a href="#" class="btn btn-success btn-xs">Agregar</a>
                         </div>
                     </div>
-                    <div class="panel panel-back noti-box">
-                        <span class="icon-box bg-color-green set-icon">
-                            <i class="fa fa-desktop"></i>
-                        </span>
-                        <div class="text-box" >
-                            <p class="main-text">Display</p>
-                            <p class="text-muted">Looking Good</p>
-                        </div>
-                    </div>
+
                 </div>
                 <div class="col-md-8 ">
                     <div class="chat-panel panel panel-default chat-boder chat-panel-head" >
@@ -84,11 +76,17 @@
                                             <i class="fa fa-clock-o fa-fw"></i>Desactivar
                                         </a>
                                     </li>
+                                    <li>
+                                        <a href="#">
+                                            <i class="fa fa-refresh fa-fw"></i>Reiniciar
+                                        </a>
+                                    </li>                                    
                                 </ul>
                             </div>
                         </div>
                         <div class="panel-body">
                             <ul class="chat-box">
+
                                 <li class="left clearfix">
                                     <span class="chat-img pull-left">
                                         <img src="assets/img/1.png" alt="User" class="img-circle" />
@@ -98,6 +96,143 @@
                                         <small class="pull-right text-muted">
                                             <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
                                         </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
+                                        <p>
+                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
+                                        </p>
+                                        <br/>
+                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
+                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                    </div>
+                                </li>                              <li class="left clearfix">
+                                    <span class="chat-img pull-left">
+                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                    </span>
+                                    <div class="corhat-body">
+                                        <strong >Jack Sparrow</strong>
+                                        <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
+                                        </small>
+
                                         <p>
                                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
                                         </p>
