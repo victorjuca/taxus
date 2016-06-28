@@ -44,22 +44,12 @@
                             <a  href="/evento"><i class="fa fa-dashboard fa-3x"></i> Evento</a>
                         </li>
                         <li>
-                            <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> Palabras</a>
+                            <a  href="/crearusuario"><i class="fa fa-qrcode fa-3x"></i> Admin. Usuario</a>
                         </li>
-                        <li>
-                            <a  href="ui.html"><i class="fa fa-desktop fa-3x"></i> Diapositivas</a>
-                        </li>
-                        <li>
-                            <a  href="tab-panel.html"><i class="fa fa-qrcode fa-3x"></i> Admin. Usuario</a>
-                        </li>
-                        <li  >
-                            <a  href="chart.html"><i class="fa fa-bar-chart-o fa-3x"></i> Parámetros</a>
-                        </li>
-                        
                     </ul>
                     
                 </div>
-                
+
             </nav>
             <!-- /. NAV SIDE  -->
             <div id="page-wrapper" >

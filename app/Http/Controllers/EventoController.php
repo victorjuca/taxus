@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Taxuz\Http\Requests;
 use Taxuz\Http\Controllers\Controller;
 
+use Taxuz\Evento;
+
 class EventoController extends Controller
 {
     /**
@@ -26,7 +28,7 @@ class EventoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +39,12 @@ class EventoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $evento = new Evento();
+
+        $evento->nombre = $request->input('nombre');
+        $evento->clave = $request->input('clave');
+
+        $evento->save();        
     }
 
     /**
