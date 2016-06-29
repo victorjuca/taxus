@@ -17,3 +17,4 @@ Route::get('/', function () {
 Route::resource('evento', 'EventoController');
 Route::get('login', 'UsuarioController@vistalogin');
 Route::get('crearusuario', 'UsuarioController@vistacrearusuario');
+Route::get('getallevento', 'EventoController@allEvento');

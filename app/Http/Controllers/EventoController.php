@@ -58,6 +58,13 @@ class EventoController extends Controller
         //
     }
 
+    public function allEvento(){
+
+        $levento = Evento::all();
+
+        return $levento;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
