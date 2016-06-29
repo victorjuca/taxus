@@ -24,9 +24,50 @@
             <br/>
             <div class="row">
                 <div class="col-md-4">
-                    <div ng-repeat="evento in levento | orderBy: 'id' as filtered_result track by evento.id">                                    
+                    <div ng-repeat="evento in levento | orderBy: 'id' as filtered_result track by evento.id">
                         <div class="panel panel-back noti-box">
-                            <a href="#" class="btn btn-primary btn-xs btn-block" ng-click = 'modalActualizaEvento()'>Actualizar</a>
+                           
+                            <div>
+                                <div class="btn-group pull-right">
+                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-chevron-down"></i>
+                                    </button>
+                                    <ul class="dropdown-menu slidedown">
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-refresh fa-fw"></i>Refrescar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" ng-click='modalEliminaEvento(evento)'>
+                                                <i class="fa fa-check-circle fa-fw"></i>Eliminar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#" ng-click='modalActualizaEvento(evento)'>
+                                                <i class="fa fa-times fa-fw"></i>Actualizar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-clock-o fa-fw"></i>Enviar Mensajes
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-clock-o fa-fw"></i>Desactivar
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <i class="fa fa-refresh fa-fw"></i>Reiniciar
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                
+                            </div>
                             <br/>
                             <span class="icon-box bg-color-green set-icon">
                                 <i class="fa fa-desktop"></i>
@@ -47,44 +88,6 @@
                         <div class="panel-heading">
                             <i class="fa fa-comments fa-fw"></i>
                             Mensajes
-                            <div class="btn-group pull-right">
-                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-chevron-down"></i>
-                                </button>
-                                <ul class="dropdown-menu slidedown">
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-refresh fa-fw"></i>Refrescar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-check-circle fa-fw"></i>Eliminar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-times fa-fw"></i>Actualizar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o fa-fw"></i>Enviar Mensajes
-                                        </a>
-                                    </li>
-                                    <li class="divider"></li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-clock-o fa-fw"></i>Desactivar
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#">
-                                            <i class="fa fa-refresh fa-fw"></i>Reiniciar
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
                         </div>
                         <div class="panel-body">
                             <ul class="chat-box">

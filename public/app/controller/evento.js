@@ -24,11 +24,21 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$('#myModal').modal('show');
 		tipoCrud = 1;
 	}
-	$scope.modalActualizaEvento = function() {
+
+	$scope.modalActualizaEvento = function(evento) {
+		$scope.evento = evento;
 		$scope.nombreboton = 'Actualizar';
 		$('#myModal').modal('show');
 		tipoCrud = 2;
 	}
+
+	$scope.modalEliminaEvento = function(evento) {
+		$scope.evento = evento;
+		$scope.nombreboton = 'Eliminar';
+		$('#myModal').modal('show');
+		tipoCrud = 3;
+	}
+
 	$scope.modalActualizaMensaje = function() {
 		$('#modalActualizaMensaje').modal('show');
 	}
@@ -38,10 +48,14 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 
 	$scope.guardarEvento = function() {
 
+
 		if (!valida($scope)) {
 			return;
 		}
-		if(tipoCrud === 1){
+		if (tipoCrud === 1) {
+
+			//Guardar
+
 			$http({
 				method: 'post',
 				url: '/evento',
@@ -55,16 +69,17 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				defineMensaje(mensaje, true, $scope);
 				$scope.evento = '';
 				cargaEventos($scope, $http);
+				cierraMensaje($scope);
 			}).error(function(response) {
 				mensaje = "Ocurrio un error al tratar de guardar.";
 				defineMensaje(mensaje, false, $scope);
 			});
-		}else{
+		} else if (tipoCrud === 2) {
+			//Actualizar
 
-			var eventoid = $scope.eventoid;
 			$http({
 				method: 'put',
-				url: '/evento/' + eventoid,
+				url: '/evento/' + $scope.evento.id,
 				data: $.param($scope.evento),
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
@@ -74,16 +89,42 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				mensaje = 'Se actualizo correctamente el evento.';
 				defineMensaje(mensaje, true, $scope);
 				cargaEventos($scope, $http);
+				cierraMensaje($scope);
 			}).error(function(response) {
 				mensaje = 'Ocurrio un error al actualizar.';
 				defineMensaje(mensaje, false, $scope);
-			});		
+			});
+		} else if (tipoCrud === 3) {
+
+			var isConfirmDelete = confirm('¿Estas seguro de eliminar el mensaje?');
+
+			if (isConfirmDelete) {
+				$http({
+					method: 'DELETE',
+					url: '/evento/' + $scope.evento.id,
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'X-CSRF-TOKEN': $scope.token
+					}
+				}).success(function(response) {
+
+					mensaje = 'Se eliminoo el mensaje correctamente.';
+					defineMensaje(mensaje, true, $scope);
+					$scope.evento = '';
+					cargaEventos($scope, $http);
+					cierraMensaje($scope);
+				}).error(function(response) {
+					mensaje = 'Ocurrio un error al eliminar el mensaje.';
+					defineMensaje(mensaje, false, $scope);
+				});
+			}
+
 		}
 
 	}
 
-	$scope.crudMensaje = function(){
-		if(tipoCrud === 1){
+	$scope.crudMensaje = function() {
+		if (tipoCrud === 1) {
 			$http({
 				method: 'post',
 				url: '/mensaje',
@@ -97,7 +138,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			}).error(function(response) {
 				alert('Error al guardar.');
 			});
-		}else{
+		} else {
 
 			var mensajeid = $scope.mensajeid;
 			$http({
@@ -113,35 +154,9 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			}).error(function(response) {
 				alert('Error al actualizar.');
 			});
-		}		
+		}
 	}
 
-	$scope.eliminarMensaje = function() {
-
-		var mensajeid = $scope.mensajeid;
-		if (typeof eventoid == "undefined") {
-			alert('Seleccione un mensaje.');
-			return;
-		}
-
-		var isConfirmDelete = confirm('¿Estas seguro de eliminar el mensaje?');
-
-		if (isConfirmDelete) {
-			$http({
-				method: 'DELETE',
-				url: '/mensaje/' + mensajeid,
-				//data: $.param($scope.calendario),
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'X-CSRF-TOKEN': $scope.token
-				}
-			}).success(function(response) {
-				alert('Se elimino el mensaje.');
-			}).error(function(response) {
-				alert('Error al eliminar.');
-			});
-		}
-	};
 
 	$scope.eliminar = function() {
 
@@ -168,6 +183,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				mensaje = 'Se elimino correctamente.';
 				defineMensaje(mensaje, false, $scope);
 				cargaEventos($scope, $http);
+				cierraMensaje($scope);
 			}).error(function(response) {
 				mensaje = "Ocurrio un error al tratar de eliminar.";
 				defineMensaje(mensaje, false, $scope);
@@ -235,4 +251,8 @@ function defineMensaje(mensaje, tipo, scope) {
 
 	scope.mensajes = mensaje;
 	scope.showmensaje = true;
+}
+function cierraMensaje(scope){
+	scope.mensajes = '';
+	scope.showmensaje = false;
 }
