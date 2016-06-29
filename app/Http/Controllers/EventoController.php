@@ -85,7 +85,11 @@ class EventoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $evento = Evento::find($id);
+        $evento->nombre = $request->input('nombre');
+        $evento->clave = $request->input('clave');
+
+        $evento->save();  
     }
 
     /**
@@ -96,6 +100,7 @@ class EventoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $evento = Evento::find($id);
+        $evento->delete();       
     }
 }

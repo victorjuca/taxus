@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use Taxuz\Http\Requests;
 use Taxuz\Http\Controllers\Controller;
+use Taxuz\Mensaje;
+use DB;
 
 class MensajeController extends Controller
 {
@@ -37,7 +39,14 @@ class MensajeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $mensaje = new Mensaje();
+
+        $mensaje->descripcion = $request->input('descripcion');
+        $mensaje->fecha = $request->input('fecha');
+        $mensaje->hora = $request->input('hora');
+        $mensaje->eventoid = $request->input('eventoid');
+
+        $mensaje->save();
     }
 
     /**
@@ -46,9 +55,11 @@ class MensajeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($eventoid)
     {
-        //
+        $lmensaje = DB::table('mensaje')->where('eventoid', '>=', $eventoid)->orderBy('fehca')->orderBy('hora');
+
+        return $lmensaje;
     }
 
     /**
@@ -71,7 +82,14 @@ class MensajeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $mensaje = Mensaje::find($id);
+
+        $mensaje->descripcion = $request->input('descripcion');
+        $mensaje->fecha = $request->input('fecha');
+        $mensaje->hora = $request->input('hora');
+        $mensaje->eventoid = $request->input('eventoid');
+
+        $mensaje->save();        
     }
 
     /**
@@ -82,6 +100,7 @@ class MensajeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $mensaje = Mensaje::find($id);
+        $mensaje->delete();
     }
 }
