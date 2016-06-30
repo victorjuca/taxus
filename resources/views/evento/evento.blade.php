@@ -76,9 +76,10 @@
                                 <p class="main-text">%%evento.nombre%%</p>
                                 <p class="text-muted">25 mensajes mostrados</p>
                                 <p class="">Clave del Evento: %%evento.clave%%</p>
-                                <textarea class="form-control" rows="3"></textarea>
+
                                 <br/>
-                                <a href="#" class="btn btn-success btn-xs">Agregar</a>
+                              
+                                <a href="#" class="btn btn-success btn-xs" ng-click="modalCrudMensaje(1)">Agregar</a>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,5 @@
-        <div class="modal fade" id="modalActualizaMensaje" role="dialog">
+
+        <div class="modal fade" id="modalCrudMensaje" role="dialog">
             <div class="modal-dialog">
                 <!-- Modal content-->
                 <div class="modal-content">
@@ -10,9 +11,9 @@
                         <form role="form">
                             <div class="form-group">
                                 <label for="nombre">Mensaje</label>
-                                <textarea class="form-control" rows="3"></textarea>
+                                <textarea class="form-control" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
                             </div>
-                            <button type="submit" class="btn btn-success btn-block">Guardar</button>
+                            <button type="submit" class="btn btn-success btn-block" ng-click = 'crudMensaje(opcMensaje)'>%%nombreBotonMensaje%%</button>
                         </form>
                     </div>
                     <div class="modal-footer">

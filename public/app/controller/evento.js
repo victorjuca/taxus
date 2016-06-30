@@ -23,6 +23,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$scope.nombreboton = 'Guardar';
 		$('#myModal').modal('show');
 		tipoCrud = 1;
+		cierraMensaje($scope);		
 	}
 
 	$scope.modalActualizaEvento = function(evento) {
@@ -30,6 +31,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$scope.nombreboton = 'Actualizar';
 		$('#myModal').modal('show');
 		tipoCrud = 2;
+		cierraMensaje($scope);
 	}
 
 	$scope.modalEliminaEvento = function(evento) {
@@ -37,10 +39,18 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$scope.nombreboton = 'Eliminar';
 		$('#myModal').modal('show');
 		tipoCrud = 3;
+		cierraMensaje($scope);
 	}
 
-	$scope.modalActualizaMensaje = function() {
-		$('#modalActualizaMensaje').modal('show');
+	$scope.modalCrudMensaje = function(opc) {
+		$('#modalCrudMensaje').modal('show');
+
+		if(opc === 1){
+			$scope.nombreBotonMensaje = 'Guardar';
+		}else if(opc === 2){
+			$scope.nombreBotonMensaje = 'Actualizar';
+		}
+		$scope.opcMensaje = opc;
 	}
 	$scope.modalEliminarMensaje = function() {
 		$('#modalEliminarMensaje').modal('show');
@@ -52,6 +62,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		if (!valida($scope)) {
 			return;
 		}
+
 		if (tipoCrud === 1) {
 
 			//Guardar
@@ -66,13 +77,12 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				}
 			}).success(function(response) {
 				mensaje = 'Se guardo correctamente.';
-				defineMensaje(mensaje, true, $scope);
+				defineMensajeEvento(mensaje, true, $scope);
 				$scope.evento = '';
 				cargaEventos($scope, $http);
-				cierraMensaje($scope);
 			}).error(function(response) {
 				mensaje = "Ocurrio un error al tratar de guardar.";
-				defineMensaje(mensaje, false, $scope);
+				defineMensajeEvento(mensaje, false, $scope);
 			});
 		} else if (tipoCrud === 2) {
 			//Actualizar
@@ -87,12 +97,11 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				}
 			}).success(function(response) {
 				mensaje = 'Se actualizo correctamente el evento.';
-				defineMensaje(mensaje, true, $scope);
+				defineMensajeEvento(mensaje, true, $scope);
 				cargaEventos($scope, $http);
-				cierraMensaje($scope);
 			}).error(function(response) {
 				mensaje = 'Ocurrio un error al actualizar.';
-				defineMensaje(mensaje, false, $scope);
+				defineMensajeEvento(mensaje, false, $scope);
 			});
 		} else if (tipoCrud === 3) {
 
@@ -108,14 +117,13 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 					}
 				}).success(function(response) {
 
-					mensaje = 'Se eliminoo el mensaje correctamente.';
-					defineMensaje(mensaje, true, $scope);
+					mensaje = 'Se elimino el mensaje correctamente.';
+					defineMensajeEvento(mensaje, true, $scope);
 					$scope.evento = '';
 					cargaEventos($scope, $http);
-					cierraMensaje($scope);
 				}).error(function(response) {
 					mensaje = 'Ocurrio un error al eliminar el mensaje.';
-					defineMensaje(mensaje, false, $scope);
+					defineMensajeEvento(mensaje, false, $scope);
 				});
 			}
 
@@ -123,8 +131,12 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 
 	}
 
-	$scope.crudMensaje = function() {
-		if (tipoCrud === 1) {
+	$scope.crudMensaje = function(opc) {
+		if (opc === 1) {
+
+			$scope.mensaje.fecha = getFechaActual();
+			$scope.mensaje.hora = getHoraActual();
+			console.log($scope.mensaje);
 			$http({
 				method: 'post',
 				url: '/mensaje',
@@ -138,13 +150,12 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			}).error(function(response) {
 				alert('Error al guardar.');
 			});
-		} else {
+		} else if(opc === 2) {
 
-			var mensajeid = $scope.mensajeid;
 			$http({
 				method: 'put',
-				url: '/mensaje/' + mensajeid,
-				data: $.param($scope.mensaje),
+				url: '/mensaje/' + mensajeObj.id,
+				data: $.param(mensaje),
 				headers: {
 					'Content-Type': 'application/x-www-form-urlencoded',
 					'X-CSRF-TOKEN': $scope.token
@@ -154,45 +165,61 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			}).error(function(response) {
 				alert('Error al actualizar.');
 			});
+		}else if(opc === 3){
+			var isConfirmDelete = confirm('¿Estas seguro de eliminar el evento?');
+
+			if (isConfirmDelete) {
+
+
+				$http({
+					method: 'DELETE',
+					url: '/evento/' + mensajeObj.id,
+					//data: $.param($scope.calendario),
+					headers: {
+						'Content-Type': 'application/x-www-form-urlencoded',
+						'X-CSRF-TOKEN': $scope.token
+					}
+				}).success(function(response) {
+					mensaje = 'Se elimino correctamente.';
+					defineMensajeEvento(mensaje, false, $scope);
+					cargaEventos($scope, $http);
+					cierraMensaje($scope);
+				}).error(function(response) {
+					mensaje = "Ocurrio un error al tratar de eliminar.";
+					defineMensajeEvento(mensaje, false, $scope);
+				});
+			}
 		}
 	}
 
-
-	$scope.eliminar = function() {
-
-		var eventoid = $scope.eventoid;
-		if (typeof eventoid == "undefined") {
-			alert('Seleccione un evento.');
-			return;
-		}
-
-		var isConfirmDelete = confirm('¿Estas seguro de eliminar el evento?');
-
-		if (isConfirmDelete) {
-
-
-			$http({
-				method: 'DELETE',
-				url: '/evento/' + eventoid,
-				//data: $.param($scope.calendario),
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'X-CSRF-TOKEN': $scope.token
-				}
-			}).success(function(response) {
-				mensaje = 'Se elimino correctamente.';
-				defineMensaje(mensaje, false, $scope);
-				cargaEventos($scope, $http);
-				cierraMensaje($scope);
-			}).error(function(response) {
-				mensaje = "Ocurrio un error al tratar de eliminar.";
-				defineMensaje(mensaje, false, $scope);
-			});
-		}
-	};
-
 }]);
 
+function getFechaActual(){
+	var hoy = new Date();
+	var dd = hoy.getDate();
+	var mm = hoy.getMonth()+1; //hoy es 0!
+	var yyyy = hoy.getFullYear();
+
+	if(dd<10) {
+	    dd='0'+dd
+	} 
+
+	if(mm<10) {
+	    mm='0'+mm
+	} 
+
+	hoy = yyyy+'-'+mm+'-'+dd;
+
+	return hoy;	
+}
+
+function getHoraActual(){
+	var d = new Date(); 
+
+	var hora = d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+
+	return hora;
+}
 function cargaEventos(scope, http) {
 	http({
 		method: 'GET',
@@ -239,7 +266,7 @@ function validaVacion(valor) {
 	return true;
 }
 
-function defineMensaje(mensaje, tipo, scope) {
+function defineMensajeEvento(mensaje, tipo, scope) {
 
 	if (tipo) {
 		scope.estilo = 'alert alert-success fade in';
@@ -255,4 +282,19 @@ function defineMensaje(mensaje, tipo, scope) {
 function cierraMensaje(scope){
 	scope.mensajes = '';
 	scope.showmensaje = false;
+}
+
+
+function defineMensajeMensaje(mensaje, tipo, scope) {
+
+	if (tipo) {
+		scope.estiloMensaje = 'alert alert-success fade in';
+		scope.estadoMensaje = 'Exito!! ';
+	} else {
+		scope.estadoMensaje = 'Error!! ';
+		scope.estiloMensaje = 'alert alert-danger fade in';
+	}
+
+	scope.mensajes = mensaje;
+	scope.showmensaje = true;
 }
