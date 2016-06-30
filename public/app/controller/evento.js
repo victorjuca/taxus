@@ -23,7 +23,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$scope.nombreboton = 'Guardar';
 		$('#myModal').modal('show');
 		tipoCrud = 1;
-		cierraMensaje($scope);		
+		cierraMensaje($scope);
 	}
 
 	$scope.modalActualizaEvento = function(evento) {
@@ -34,27 +34,9 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		cierraMensaje($scope);
 	}
 
-	$scope.modalEliminaEvento = function(evento) {
-		$scope.evento = evento;
-		$scope.nombreboton = 'Eliminar';
-		$('#myModal').modal('show');
-		tipoCrud = 3;
-		cierraMensaje($scope);
-	}
 
-	$scope.modalCrudMensaje = function(opc) {
-		$('#modalCrudMensaje').modal('show');
 
-		if(opc === 1){
-			$scope.nombreBotonMensaje = 'Guardar';
-		}else if(opc === 2){
-			$scope.nombreBotonMensaje = 'Actualizar';
-		}
-		$scope.opcMensaje = opc;
-	}
-	$scope.modalEliminarMensaje = function() {
-		$('#modalEliminarMensaje').modal('show');
-	}
+
 
 	$scope.guardarEvento = function() {
 
@@ -131,49 +113,26 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 
 	}
 
-	$scope.crudMensaje = function(opc) {
+	$scope.modalCrudMensaje = function(eventoid, opc) {
+		$('#modalCrudMensaje').modal('show');
+
 		if (opc === 1) {
-
-			$scope.mensaje.fecha = getFechaActual();
-			$scope.mensaje.hora = getHoraActual();
-			console.log($scope.mensaje);
-			$http({
-				method: 'post',
-				url: '/mensaje',
-				data: $.param($scope.mensaje),
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'X-CSRF-TOKEN': $scope.token
-				}
-			}).success(function(response) {
-				alert('Se guardo el mensaje.');
-			}).error(function(response) {
-				alert('Error al guardar.');
-			});
-		} else if(opc === 2) {
-
-			$http({
-				method: 'put',
-				url: '/mensaje/' + mensajeObj.id,
-				data: $.param(mensaje),
-				headers: {
-					'Content-Type': 'application/x-www-form-urlencoded',
-					'X-CSRF-TOKEN': $scope.token
-				}
-			}).success(function(response) {
-				alert('Se actualiz el mensaje.');
-			}).error(function(response) {
-				alert('Error al actualizar.');
-			});
-		}else if(opc === 3){
-			var isConfirmDelete = confirm('¿Estas seguro de eliminar el evento?');
-
-			if (isConfirmDelete) {
+			$scope.nombreBotonMensaje = 'Guardar';
+		} else if (opc === 2) {
+			$scope.nombreBotonMensaje = 'Actualizar';
+		}
+		$scope.opcMensaje = opc;
+		$scope.eventoid = eventoid;
+	}
 
 
+	$scope.eliminaMensaje = function(mensajeCRUD) {
+
+		alertify.confirm("¿Deseas eliminar el mensaje?", function(e) {
+			if (e) {
 				$http({
 					method: 'DELETE',
-					url: '/evento/' + mensajeObj.id,
+					url: '/mensaje/' + mensajeCRUD.id,
 					//data: $.param($scope.calendario),
 					headers: {
 						'Content-Type': 'application/x-www-form-urlencoded',
@@ -181,45 +140,138 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 					}
 				}).success(function(response) {
 					mensaje = 'Se elimino correctamente.';
-					defineMensajeEvento(mensaje, false, $scope);
-					cargaEventos($scope, $http);
-					cierraMensaje($scope);
+					alertify.success(mensaje);
+					cargarMenesajes($scope, $http, mensajeCRUD.eventoid);
 				}).error(function(response) {
 					mensaje = "Ocurrio un error al tratar de eliminar.";
-					defineMensajeEvento(mensaje, false, $scope);
+					alertify.error(mensaje);
 				});
 			}
+		});
+	}
+
+
+
+	$scope.agregaMensaje = function(descripcion,eventoid, opc) {
+		$scope.mensaje = {};
+
+
+		$scope.mensaje.fecha = getFechaActual();
+		$scope.mensaje.hora = getHoraActual();
+		$scope.mensaje.eventoid = eventoid;
+		$scope.mensaje.descripcion = descripcion;
+
+		if (!validaMensaje(descripcion)) {
+			return;
 		}
+
+		$http({
+			method: 'post',
+			url: '/mensaje',
+			data: $.param($scope.mensaje),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'X-CSRF-TOKEN': $scope.token
+			}
+		}).success(function(response) {
+			alertify.success("Se agregó correctamente el mensaje.");
+			document.getElementById("mensaje").value = '';
+			cargarMenesajes($scope, $http, eventoid);
+		}).error(function(response) {
+			alertify.error("Ocurrió un error al agregar el mensaje.");
+		})
+	}
+	var mensajeActualiza;
+	$scope.modalActualizaMensaje = function(mensaje) {
+		$('#modalCrudMensaje').modal('show');
+		document.getElementById("mensajeActualiza").value = mensaje.descripcion;
+		mensajeActualiza = mensaje;
+	}
+
+	$scope.actualizaMensaje = function() {
+		$scope.mensaje = mensajeActualiza;
+
+		var descripcion = document.getElementById("mensajeActualiza").value;
+
+		$scope.mensaje.descripcion = descripcion; 
+
+
+		if (!validaMensaje(descripcion)) {
+			return;
+		}
+
+		$http({
+			method: 'put',
+			url: '/mensaje/' + $scope.mensaje.id,
+			data: $.param($scope.mensaje),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'X-CSRF-TOKEN': $scope.token
+			}
+		}).success(function(response) {
+			alertify.success("Se actualizó correctamente el mensaje.");
+			$('#modalCrudMensaje').modal('hide');
+			cargarMenesajes($scope, $http,  $scope.mensaje.eventoid);
+		}).error(function(response) {
+			alertify.error("Ocurrió un error al actualizar el mensaje.");
+		})
+	}
+
+	$scope.cargaMensajeEvento = function(eventoid) {
+
+		cargarMenesajes($scope, $http, eventoid);
+
 	}
 
 }]);
 
-function getFechaActual(){
-	var hoy = new Date();
-	var dd = hoy.getDate();
-	var mm = hoy.getMonth()+1; //hoy es 0!
-	var yyyy = hoy.getFullYear();
+function validaMensaje(mensaje) {
 
-	if(dd<10) {
-	    dd='0'+dd
-	} 
+	
+	if (!validaVacion(mensaje)) {
+		alertify.error("El Mensaje se encuentra vacío");
+		return false;
+	}
 
-	if(mm<10) {
-	    mm='0'+mm
-	} 
+	if (mensaje.length < 5) {
+		alertify.error("El mensaje debe de tener más de 5 caracteres.");
+		return false;
+	}
 
-	hoy = yyyy+'-'+mm+'-'+dd;
-
-	return hoy;	
+	if (mensaje.length > 200) {
+		alertify.error("El mensaje no debe de tener más de 200 caracteres.");
+		return false;
+	}
+	return true;
 }
 
-function getHoraActual(){
-	var d = new Date(); 
+function getFechaActual() {
+	var hoy = new Date();
+	var dd = hoy.getDate();
+	var mm = hoy.getMonth() + 1; //hoy es 0!
+	var yyyy = hoy.getFullYear();
 
-	var hora = d.getHours()+':'+d.getMinutes()+':'+d.getSeconds();
+	if (dd < 10) {
+		dd = '0' + dd
+	}
+
+	if (mm < 10) {
+		mm = '0' + mm
+	}
+
+	hoy = yyyy + '-' + mm + '-' + dd;
+
+	return hoy;
+}
+
+function getHoraActual() {
+	var d = new Date();
+
+	var hora = d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds();
 
 	return hora;
 }
+
 function cargaEventos(scope, http) {
 	http({
 		method: 'GET',
@@ -233,6 +285,24 @@ function cargaEventos(scope, http) {
 	}).error(function(response) {
 
 	});
+}
+
+
+function cargarMenesajes(scope, http, eventoid) {
+	http({
+		method: 'GET',
+		url: '/mensaje/' + eventoid,
+		headers: {
+			'Content-Type': 'application/x-www-form-urlencoded',
+			'X-CSRF-TOKEN': scope.token
+		}
+	}).success(function(response) {
+		scope.lmensaje = response;
+		//alertify.success('Se cargaron correctamente los mensajes del evento.');
+	}).error(function(response) {
+		alertify.error("Ocurrió un error al tratar de cargar los mensajes del evento.");
+	});
+
 }
 
 function valida(scope) {
@@ -279,7 +349,8 @@ function defineMensajeEvento(mensaje, tipo, scope) {
 	scope.mensajes = mensaje;
 	scope.showmensaje = true;
 }
-function cierraMensaje(scope){
+
+function cierraMensaje(scope) {
 	scope.mensajes = '';
 	scope.showmensaje = false;
 }

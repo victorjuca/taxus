@@ -26,7 +26,7 @@
                 <div class="col-md-4">
                     <div ng-repeat="evento in levento | orderBy: 'id' as filtered_result track by evento.id">
                         <div class="panel panel-back noti-box">
-                           
+                            
                             <div>
                                 <div class="btn-group pull-right">
                                     <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
@@ -34,34 +34,19 @@
                                     </button>
                                     <ul class="dropdown-menu slidedown">
                                         <li>
-                                            <a href="#">
-                                                <i class="fa fa-refresh fa-fw"></i>Refrescar
+                                            <a href="#" ng-click='cargaMensajeEvento(evento.id)'>
+                                                <i class="fa fa-shield fa-rotate-270"></i> Ver
+                                            </a>
+                                        </li>
+                                        <li class="divider"></li>
+                                        <li>
+                                            <a href="#" ng-click='modalActualizaEvento(evento)'>
+                                                <i class="fa fa-refresh fa-fw"></i>Actualizar
                                             </a>
                                         </li>
                                         <li>
                                             <a href="#" ng-click='modalEliminaEvento(evento)'>
                                                 <i class="fa fa-check-circle fa-fw"></i>Eliminar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" ng-click='modalActualizaEvento(evento)'>
-                                                <i class="fa fa-times fa-fw"></i>Actualizar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-clock-o fa-fw"></i>Enviar Mensajes
-                                            </a>
-                                        </li>
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-clock-o fa-fw"></i>Desactivar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-refresh fa-fw"></i>Reiniciar
                                             </a>
                                         </li>
                                     </ul>
@@ -76,10 +61,12 @@
                                 <p class="main-text">%%evento.nombre%%</p>
                                 <p class="text-muted">25 mensajes mostrados</p>
                                 <p class="">Clave del Evento: %%evento.clave%%</p>
-
-                                <br/>
-                              
-                                <a href="#" class="btn btn-success btn-xs" ng-click="modalCrudMensaje(1)">Agregar</a>
+                                <form role="form">
+                                    <div class="form-group" name = 'formAgregarMensaje'>
+                                        <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-block" ng-click = 'agregaMensaje(mensaje.descripcion,evento.id,1)'>Agregar</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -92,176 +79,52 @@
                         </div>
                         <div class="panel-body">
                             <ul class="chat-box">
-                                <li class="left clearfix">
-                                    <span class="chat-img pull-left">
-                                        <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                    </span>
-                                    <div class="corhat-body">
-                                        <strong >Jack Sparrow</strong>
-                                        <small class="pull-right text-muted">
-                                        <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                                        </small>
-                                        <p>
-                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                        </p>
-                                        <br/>
-                                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
-                                    </div>
-                                </li>                              <li class="left clearfix">
-                                <span class="chat-img pull-left">
-                                    <img src="assets/img/1.png" alt="User" class="img-circle" />
-                                </span>
-                                <div class="corhat-body">
-                                    <strong >Jack Sparrow</strong>
-                                    <small class="pull-right text-muted">
-                                    <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                                    </small>
-                                    <p>
-                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                    </p>
-                                    <br/>
-                                    <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                                    <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                                <div ng-repeat="mensaje in lmensaje ">
+                                    
+                                    <li class="left clearfix">
+                                        <span class="chat-img pull-left">
+                                            <img src="assets/img/1.png" alt="User" class="img-circle" />
+                                        </span>
+                                        <div class="corhat-body">
+                                            <strong >Vico Show</strong>
+                                            <small class="pull-right text-muted">
+                                            <i class="fa fa-clock-o fa-fw"></i>%%mensaje.fecha%% --- %%mensaje.hora%%
+                                            </small>
+                                            <p>
+                                                %%mensaje.descripcion%%
+                                            </p>
+                                            <br/>
+                                            <button type="submit" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje(mensaje)">Actualizar</button>
+                                            <button type="submit" class="btn btn-danger btn-xs" ng-click="eliminaMensaje(mensaje)">Eliminar</button>
+
+                                        </div>
+                                    </li>
                                 </div>
-                            </li>                              <li class="left clearfix">
-                            <span class="chat-img pull-left">
-                                <img src="assets/img/1.png" alt="User" class="img-circle" />
-                            </span>
-                            <div class="corhat-body">
-                                <strong >Jack Sparrow</strong>
-                                <small class="pull-right text-muted">
-                                <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                                </small>
-                                <p>
-                                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                                </p>
-                                <br/>
-                                <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                                <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
-                            </div>
-                        </li>                              <li class="left clearfix">
-                        <span class="chat-img pull-left">
-                            <img src="assets/img/1.png" alt="User" class="img-circle" />
-                        </span>
-                        <div class="corhat-body">
-                            <strong >Jack Sparrow</strong>
-                            <small class="pull-right text-muted">
-                            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                            </small>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                            </p>
-                            <br/>
-                            <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                            <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+                            </ul>
                         </div>
-                    </li>                              <li class="left clearfix">
-                    <span class="chat-img pull-left">
-                        <img src="assets/img/1.png" alt="User" class="img-circle" />
-                    </span>
-                    <div class="corhat-body">
-                        <strong >Jack Sparrow</strong>
-                        <small class="pull-right text-muted">
-                        <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                        </small>
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                        </p>
-                        <br/>
-                        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
                     </div>
-                </li>                              <li class="left clearfix">
-                <span class="chat-img pull-left">
-                    <img src="assets/img/1.png" alt="User" class="img-circle" />
-                </span>
-                <div class="corhat-body">
-                    <strong >Jack Sparrow</strong>
-                    <small class="pull-right text-muted">
-                    <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                    </small>
-                    <p>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                    </p>
-                    <br/>
-                    <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                    <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
                 </div>
-            </li>                              <li class="left clearfix">
-            <span class="chat-img pull-left">
-                <img src="assets/img/1.png" alt="User" class="img-circle" />
-            </span>
-            <div class="corhat-body">
-                <strong >Jack Sparrow</strong>
-                <small class="pull-right text-muted">
-                <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-                </small>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-                </p>
-                <br/>
-                <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-                <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
             </div>
-        </li>                              <li class="left clearfix">
-        <span class="chat-img pull-left">
-            <img src="assets/img/1.png" alt="User" class="img-circle" />
-        </span>
-        <div class="corhat-body">
-            <strong >Jack Sparrow</strong>
-            <small class="pull-right text-muted">
-            <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-            </small>
-            <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-            </p>
-            <br/>
-            <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-            <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
         </div>
-    </li>                              <li class="left clearfix">
-    <span class="chat-img pull-left">
-        <img src="assets/img/1.png" alt="User" class="img-circle" />
-    </span>
-    <div class="corhat-body">
-        <strong >Jack Sparrow</strong>
-        <small class="pull-right text-muted">
-        <i class="fa fa-clock-o fa-fw"></i>12 mins ago del 2016-12-02
-        </small>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur bibendum ornare dolor, quis ullamcorper ligula sodales.
-        </p>
-        <br/>
-        <a href="#" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje()">Actulizar</a>
-        <a href="#" class="btn btn-danger btn-xs" ng-click="modalEliminarMensaje()">Eliminar</a>
+        @include('evento.formevento')
+        @include('evento.formactualizamensaje')
+        <div class="modal fade" id="modalEliminarMensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        Eliminar
+                    </div>
+                    <div class="modal-body">
+                        ¿Estas seguro de eliminar el Mensaje?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <a href="#" class="btn btn-danger danger">Eliminar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</li>
-</ul>
-</div>
-</div>
-</div>
-</div>
-</div>
-@include('evento.formevento')
-@include('evento.formactualizamensaje')
-<div class="modal fade" id="modalEliminarMensaje" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-<div class="modal-content">
-<div class="modal-header">
-Eliminar
-</div>
-<div class="modal-body">
-¿Estas seguro de eliminar el Mensaje?
-</div>
-<div class="modal-footer">
-<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
-<a href="#" class="btn btn-danger danger">Eliminar</a>
-</div>
-</div>
-</div>
-</div>
-</div>
 </div>
 {!!Html::script('app/lib/angular/angular.min.js')!!}
 {!!Html::script('app/controller/evento.js')!!}

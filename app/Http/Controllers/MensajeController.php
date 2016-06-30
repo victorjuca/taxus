@@ -57,7 +57,7 @@ class MensajeController extends Controller
      */
     public function show($eventoid)
     {
-        $lmensaje = DB::table('mensaje')->where('eventoid', '>=', $eventoid)->orderBy('fehca')->orderBy('hora');
+        $lmensaje = DB::table('mensaje')->where('eventoid', '>=', $eventoid)->orderBy('hora','desc')->get();
 
         return $lmensaje;
     }

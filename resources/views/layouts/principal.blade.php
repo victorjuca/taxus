@@ -10,7 +10,11 @@
         {!!Html::style('assets/css/font-awesome.css')!!}
         <!-- CUSTOM STYLES-->
         {!!Html::style('assets/css/custom.css')!!}
-        <!-- GOOGLE FONTS-->
+
+        
+        {!!Html::style('alertify/themes/alertify.core.css')!!}
+        {!!Html::style('alertify/themes/alertify.default.css')!!}
+
     </head>
     <body>
         <div id="wrapper">
@@ -70,6 +74,6 @@
         {!!Html::script('assets/js/jquery.metisMenu.js')!!}
         <!-- CUSTOM SCRIPTS -->
         {!!Html::script('assets/js/custom.js')!!}
-        
+        {!!Html::script('alertify/lib/alertify.js')!!}         
     </body>
 </html>

@@ -10,10 +10,9 @@
                     <div class="modal-body" style="padding:40px 50px;">
                         <form role="form">
                             <div class="form-group">
-                                <label for="nombre">Mensaje</label>
-                                <textarea class="form-control" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
+                                <textarea class="form-control" id="mensajeActualiza" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
                             </div>
-                            <button type="submit" class="btn btn-success btn-block" ng-click = 'crudMensaje(opcMensaje)'>%%nombreBotonMensaje%%</button>
+                            <button type="submit" class="btn btn-success btn-block" ng-click = 'actualizaMensaje()'>Actualiza</button>
                         </form>
                     </div>
                     <div class="modal-footer">
