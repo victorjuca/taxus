@@ -34,10 +34,6 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		cierraMensaje($scope);
 	}
 
-
-
-
-
 	$scope.guardarEvento = function() {
 
 
@@ -87,9 +83,15 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			});
 		} else if (tipoCrud === 3) {
 
-			var isConfirmDelete = confirm('¿Estas seguro de eliminar el mensaje?');
 
-			if (isConfirmDelete) {
+		}
+
+	}
+
+	$scope.eliminaEvento = function() {
+
+		alertify.confirm("¿Deseas eliminar el evento?", function(e) {
+			if (e) {
 				$http({
 					method: 'DELETE',
 					url: '/evento/' + $scope.evento.id,
@@ -100,18 +102,18 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				}).success(function(response) {
 
 					mensaje = 'Se elimino el mensaje correctamente.';
-					defineMensajeEvento(mensaje, true, $scope);
+					alertify.success(mensaje);
 					$scope.evento = '';
 					cargaEventos($scope, $http);
 				}).error(function(response) {
 					mensaje = 'Ocurrio un error al eliminar el mensaje.';
-					defineMensajeEvento(mensaje, false, $scope);
+					alertify.error(mensaje);
 				});
 			}
-
-		}
-
+		});
 	}
+
+
 
 	$scope.modalCrudMensaje = function(eventoid, opc) {
 		$('#modalCrudMensaje').modal('show');
@@ -153,6 +155,16 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 
 
 	$scope.agregaMensaje = function(descripcion,eventoid, opc) {
+
+		if(!validaVacion(eventoid)) {
+			alertify.error("Debes seleccionar un evento.");
+			return;
+
+		}
+		if (!validaMensaje(descripcion)) {
+			return;
+		}
+
 		$scope.mensaje = {};
 
 
@@ -161,9 +173,6 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 		$scope.mensaje.eventoid = eventoid;
 		$scope.mensaje.descripcion = descripcion;
 
-		if (!validaMensaje(descripcion)) {
-			return;
-		}
 
 		$http({
 			method: 'post',
@@ -177,6 +186,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			alertify.success("Se agregó correctamente el mensaje.");
 			document.getElementById("mensaje").value = '';
 			cargarMenesajes($scope, $http, eventoid);
+			$scope.mensaje ='';
 		}).error(function(response) {
 			alertify.error("Ocurrió un error al agregar el mensaje.");
 		})
@@ -212,6 +222,8 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			alertify.success("Se actualizó correctamente el mensaje.");
 			$('#modalCrudMensaje').modal('hide');
 			cargarMenesajes($scope, $http,  $scope.mensaje.eventoid);
+			document.getElementById("mensaje").value ='';
+			$scope.mensaje = '';
 		}).error(function(response) {
 			alertify.error("Ocurrió un error al actualizar el mensaje.");
 		})
@@ -283,7 +295,7 @@ function cargaEventos(scope, http) {
 	}).success(function(response) {
 		scope.levento = response;
 	}).error(function(response) {
-
+		alertify.error("Ocurrió un error al tratar de cargar los eventos.");
 	});
 }
 

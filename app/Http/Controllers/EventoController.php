@@ -31,6 +31,10 @@ class EventoController extends Controller
 
     }
 
+    public function lanzataxuz($eventoid){
+       return view('taxuz.taxuz'); 
+    }
+
     /**
      * Store a newly created resource in storage.
      *

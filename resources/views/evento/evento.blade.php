@@ -17,14 +17,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <button type="button" class="btn btn-success  btn-block "  ng-click="lanzamodal()">Agregar</button>
+                <div class=" col-md-4">
+
+                <select  class="form-control" ng-change="cargaMensajeEvento(evento.id)" ng-model="evento" ng-options="
+                evento as evento.nombre for evento in levento" >
+                    <option value="">------------</option>
+                </select>
+
+                </div>
+                <div class="col-md-8">
+                    <button type="button" class="btn btn-success pull-lefth"  ng-click="lanzamodal()">Agregar</button>
                 </div>
             </div>
             <br/>
             <div class="row">
                 <div class="col-md-4">
-                    <div ng-repeat="evento in levento | orderBy: 'id' as filtered_result track by evento.id">
                         <div class="panel panel-back noti-box">
                             
                             <div>
@@ -38,6 +45,11 @@
                                                 <i class="fa fa-shield fa-rotate-270"></i> Ver
                                             </a>
                                         </li>
+                                        <li>
+                                            <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)'>
+                                                <i class="fa fa-flag "></i> Lanzar
+                                            </a>
+                                        </li>                                        
                                         <li class="divider"></li>
                                         <li>
                                             <a href="#" ng-click='modalActualizaEvento(evento)'>
@@ -45,7 +57,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="#" ng-click='modalEliminaEvento(evento)'>
+                                            <a href="#" ng-click='eliminaEvento()'>
                                                 <i class="fa fa-check-circle fa-fw"></i>Eliminar
                                             </a>
                                         </li>
@@ -69,7 +81,6 @@
                                 </form>
                             </div>
                         </div>
-                    </div>
                 </div>
                 <div class="col-md-8 ">
                     <div class="chat-panel panel panel-default chat-boder chat-panel-head" >
@@ -96,7 +107,6 @@
                                             <br/>
                                             <button type="submit" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje(mensaje)">Actualizar</button>
                                             <button type="submit" class="btn btn-danger btn-xs" ng-click="eliminaMensaje(mensaje)">Eliminar</button>
-
                                         </div>
                                     </li>
                                 </div>

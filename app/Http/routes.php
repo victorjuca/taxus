@@ -18,4 +18,6 @@ Route::resource('evento', 'EventoController');
 Route::get('login', 'UsuarioController@vistalogin');
 Route::get('crearusuario', 'UsuarioController@vistacrearusuario');
 Route::get('getallevento', 'EventoController@allEvento');
+
+Route::get('taxuz/{eventoid}', 'EventoController@lanzataxuz');
 Route::resource('mensaje', 'MensajeController');
