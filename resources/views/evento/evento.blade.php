@@ -46,7 +46,7 @@
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)'>
+                                            <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)' target="_blank">
                                                 <i class="fa fa-flag "></i> Lanzar
                                             </a>
                                         </li>                                        

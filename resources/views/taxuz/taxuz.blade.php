@@ -3,27 +3,39 @@
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
 {!!Html::script('assets/js/textualizer.js')!!}
 <style type="text/css">
-
 #txtlzr {
 text-align: center;
-font-size: 40px;
-width: auto;
-height: 300px;
+font-size: 85px;
+width: auto; /* Ancho del Background */
+height: 500px; /* Altura de Backgroud */
 margin-left: 100px;
 margin-top: 50px;
+position: absolute;
+top:0;
+left:50;
+right:50;
+bottom:0;
+margin: auto;
+background: #83C24A;
 }
 </style>
-<div id="txtlzr">
-	<p>Textualizer is a jQuery plug-in that allows you to transition through blurbs of text. </p>
-	<p>Este es mi texto de prueba para que lo verifiques.</p>
-	<p>Textualize: verb - to put into text, set down as concrete and unchanging.  Use Textualizer to transition through blurbs of text.</p>
-	<p>Blurb: noun - a short summary or some words of praise accompanying a creative work.  A promotional description.</p>
-	<p>JavaScript (abreviado comúnmente "JS") es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos,3</p>
+<input type="text" name="" value="{{$eventoid}}" ng-model = "eventoid">
+<div  ng-app="taxuzModule">
+  <div ng-controller="taxuzController">
+    <div id="txtlzr">
+      <p>Textualizer is a jQuery plug-in that allows you to transition through blurbs of text. </p>
+      <p>Este es mi texto de prueba para que lo verifiques.</p>
+      <p>Textualize: verb - to put into text, set down as concrete and unchanging.  Use Textualizer to transition through blurbs of text.</p>
+      <p>Blurb: noun - a short summary or some words of praise accompanying a creative work.  A promotional description.</p>
+      <p>JavaScript (abreviado comúnmente "JS") es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos,3</p>
+    </div>
+    <script type="text/javascript">
+    $(function() {
+    var txt = $('#txtlzr');
+    txt.textualizer();
+    txt.textualizer('start');
+    })
+    </script>
+  </div>
 </div>
-  <script type="text/javascript">
-  $(function() {
-  var txt = $('#txtlzr');
-  txt.textualizer();
-  txt.textualizer('start');
-  })
-  </script>
+{!!Html::script('app/controller/taxuz.js')!!}

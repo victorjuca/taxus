@@ -32,7 +32,8 @@ class EventoController extends Controller
     }
 
     public function lanzataxuz($eventoid){
-       return view('taxuz.taxuz'); 
+        
+       return view('taxuz.taxuz', compact('eventoid')); 
     }
 
     /**
