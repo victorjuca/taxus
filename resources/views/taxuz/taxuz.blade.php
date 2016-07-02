@@ -1,7 +1,5 @@
-{!!Html::style('assets/css/textualizer.css')!!}
-<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
-{!!Html::script('assets/js/textualizer.js')!!}
+{!!Html::style('assets/css/jquerysctipttop.css')!!}
+
 <style type="text/css">
 #txtlzr {
 text-align: center;
@@ -16,26 +14,56 @@ left:50;
 right:50;
 bottom:0;
 margin: auto;
-background: #83C24A;
+/**background: #83C24A;*/
 }
 </style>
-<input type="text" name="" value="{{$eventoid}}" ng-model = "eventoid">
+{!!Html::script('assets/js/jquery_1.9.1.min.js')!!}
 <div  ng-app="taxuzModule">
   <div ng-controller="taxuzController">
-    <div id="txtlzr">
-      <p>Textualizer is a jQuery plug-in that allows you to transition through blurbs of text. </p>
-      <p>Este es mi texto de prueba para que lo verifiques.</p>
-      <p>Textualize: verb - to put into text, set down as concrete and unchanging.  Use Textualizer to transition through blurbs of text.</p>
-      <p>Blurb: noun - a short summary or some words of praise accompanying a creative work.  A promotional description.</p>
-      <p>JavaScript (abreviado comúnmente "JS") es un lenguaje de programación interpretado, dialecto del estándar ECMAScript. Se define como orientado a objetos,3</p>
+    <input type="hidden" name="" id="eventoid" value="{{$eventoid}}" ng-model = "eventoid">
+    <div  ng-app="taxuzModule">
+      <div ng-controller="taxuzController">
+        <input type="hidden" name="_token" value="{{csrf_token()}}" id="token" ng-model="token"/>
+        <div id="fullscreen">
+                  <a href="#" class="requestfullscreen">Click to open it in fullscreen</a>
+          <a href="#" class="exitfullscreen" style="display: none">Click to exit fullscreen</a>.</p>
+        <div id="txtlzr">
+        </div>
+        </div>
+        <script type="text/javascript">
+          $(function() {
+            // check native support
+            $('#support').text($.fullscreen.isNativelySupported() ? 'supports' : 'doesn\'t support');
+            // open in fullscreen
+            $('#fullscreen .requestfullscreen').click(function() {            
+              $('#fullscreen').fullscreen();
+              return false;
+            });
+            // exit fullscreen
+            $('#fullscreen .exitfullscreen').click(function() {
+              $.fullscreen.exit();
+              return false;
+            });
+            // document's event
+            $(document).bind('fscreenchange', function(e, state, elem) {
+              // if we currently in fullscreen mode
+              if ($.fullscreen.isFullScreen()) {
+                $('#fullscreen .requestfullscreen').hide();
+                $('#fullscreen .exitfullscreen').show();
+              } else {
+                $('#fullscreen .requestfullscreen').show();
+                $('#fullscreen .exitfullscreen').hide();
+              }
+              $('#state').text($.fullscreen.isFullScreen() ? '' : 'not');
+            });
+          });
+        </script>
+      </div>
     </div>
-    <script type="text/javascript">
-    $(function() {
-    var txt = $('#txtlzr');
-    txt.textualizer();
-    txt.textualizer('start');
-    })
-    </script>
   </div>
 </div>
+
+{!!Html::script('assets/js/jquery.fullscreen-0.4.1.min.js')!!}
+{!!Html::script('app/lib/angular/angular.min.js')!!}
 {!!Html::script('app/controller/taxuz.js')!!}
+{!!Html::script('assets/js/textualizer.js')!!}
