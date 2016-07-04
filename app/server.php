@@ -4,13 +4,13 @@ specify the Homestead IP if you are using homestead or, for local environment us
 WAMP, MAMP, ... use 127.0.0..1*/
 require_once('/../vendor/autoload.php');
 $server = new Hoa\Websocket\Server(
-    new Hoa\Socket\Server('tcp://127.0.0.1:8889')
+    new Hoa\Socket\Server('tcp://127.0.0.1:9000')
 );
 
 //Manages the message event to get send data for each client using the broadcast method
 $server->on('message', function ( Hoa\Core\Event\Bucket $bucket ) {
     $data = $bucket->getData();
-    echo 'message: ', $data['message'], "\n";
+    echo 'message: ', $bucket, "\n";
     $bucket->getSource()->broadcast($data['message']);
     return;
 });
