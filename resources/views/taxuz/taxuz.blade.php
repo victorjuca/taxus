@@ -21,8 +21,7 @@ margin: auto;
 <div  ng-app="taxuzModule">
   <div ng-controller="taxuzController">
     <input type="hidden" name="" id="eventoid" value="{{$eventoid}}" ng-model = "eventoid">
-    <div  ng-app="taxuzModule">
-      <div ng-controller="taxuzController">
+
         <input type="hidden" name="_token" value="{{csrf_token()}}" id="token" ng-model="token"/>
         <div id="fullscreen">
                   <a href="#" class="requestfullscreen">Click to open it in fullscreen</a>
@@ -60,8 +59,7 @@ margin: auto;
         </script>
       </div>
     </div>
-  </div>
-</div>
+
 
 {!!Html::script('assets/js/jquery.fullscreen-0.4.1.min.js')!!}
 {!!Html::script('app/lib/angular/angular.min.js')!!}

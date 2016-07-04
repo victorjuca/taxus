@@ -17,6 +17,8 @@ app.controller('eventoCRUDController', ['$scope', '$http', function($scope, $htt
 
 app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $http) {
 
+
+	adminSocket();
 	var tipoCrud = 0;
 	cargaEventos($scope, $http);
 	$scope.lanzamodal = function() {
@@ -187,6 +189,7 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			document.getElementById("mensaje").value = '';
 			cargarMenesajes($scope, $http, eventoid);
 			$scope.mensaje ='';
+			socket.send(descripcion);
 		}).error(function(response) {
 			alertify.error("Ocurrió un error al agregar el mensaje.");
 		})
@@ -380,4 +383,33 @@ function defineMensajeMensaje(mensaje, tipo, scope) {
 
 	scope.mensajes = mensaje;
 	scope.showmensaje = true;
+}
+
+
+
+
+function adminSocket(){
+
+    var host = 'ws://127.0.0.1:9000';
+    try {
+        socket = new WebSocket(host);
+        
+        //Manages the open event within your client code
+        socket.onopen = function () {
+            console.log('Conección Abierta con ' + host);
+            return;
+        };
+        //Manages the message event within your client code
+        socket.onmessage = function (msg) {
+            console.log('Mensaje Admin: '+msg.data);
+            return;
+        };
+        //Manages the close event within your client code
+        socket.onclose = function () {
+            console.log('Conección Cerrada con ' + host);
+            return;
+        };
+    } catch (e) {
+        console.log(e);
+    }	
 }
