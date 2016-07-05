@@ -26,6 +26,7 @@ margin: auto;
         <div id="fullscreen">
                   <a href="#" class="requestfullscreen">Click to open it in fullscreen</a>
           <a href="#" class="exitfullscreen" style="display: none">Click to exit fullscreen</a>.</p>
+           <button type="button" class="btn btn-success pull-lefth"  ng-click="siguiente()">Siguiente</button>
         <div id="txtlzr">
         </div>
         </div>
@@ -63,5 +64,5 @@ margin: auto;
 
 {!!Html::script('assets/js/jquery.fullscreen-0.4.1.min.js')!!}
 {!!Html::script('app/lib/angular/angular.min.js')!!}
-{!!Html::script('app/controller/taxuz.js')!!}
 {!!Html::script('assets/js/textualizer.js')!!}
+{!!Html::script('app/controller/taxuz.js')!!}

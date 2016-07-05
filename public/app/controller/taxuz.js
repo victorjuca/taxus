@@ -14,6 +14,10 @@ app.controller('taxuzController', ['$scope', '$http', function($scope, $http) {
 
 	cargarMenesajes($scope, $http, eventoid);
 
+	$scope.siguiente = function(){
+		next(5);
+	}
+
 
 }]);
 
@@ -60,7 +64,17 @@ function cargarMenesajes(scope, http, eventoid) {
 
 }
 
+function siguientex(){
+var txt = $('#txtlzr'); // The container in which to render the list	
+txt.on('textualizer.changed', function(event, args) {
+  // check if it's the last index in the array
+  if (args.index === LAST_INDEX) {
+    txt.textualizer('pause');
+  }
+});
 
+txt.textualizer('start');	
+}
 
 
 function socket(){
