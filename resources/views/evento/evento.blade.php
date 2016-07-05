@@ -18,12 +18,10 @@
             </div>
             <div class="row">
                 <div class=" col-md-4">
-
-                <select  class="form-control" ng-change="cargaMensajeEvento(evento.id)" ng-model="evento" ng-options="
-                evento as evento.nombre for evento in levento" >
-                    <option value="">------------</option>
-                </select>
-
+                    <select  class="form-control" ng-change="cargaMensajeEvento(evento.id)" ng-model="evento" ng-options="
+                        evento as evento.nombre for evento in levento" >
+                        <option value="">------------</option>
+                    </select>
                 </div>
                 <div class="col-md-8">
                     <button type="button" class="btn btn-success pull-lefth"  ng-click="lanzamodal()">Agregar</button>
@@ -32,55 +30,54 @@
             <br/>
             <div class="row">
                 <div class="col-md-4">
-                        <div class="panel panel-back noti-box">
-                            
-                            <div>
-                                <div class="btn-group pull-right">
-                                    <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
-                                    <i class="fa fa-chevron-down"></i>
-                                    </button>
-                                    <ul class="dropdown-menu slidedown">
-                                        <li>
-                                            <a href="#" ng-click='cargaMensajeEvento(evento.id)'>
-                                                <i class="fa fa-shield fa-rotate-270"></i> Ver
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)'  target="_blank" >
-                                                <i class="fa fa-flag "></i> Lanzar
-                                            </a>
-                                        </li>                                        
-                                        <li class="divider"></li>
-                                        <li>
-                                            <a href="#" ng-click='modalActualizaEvento(evento)'>
-                                                <i class="fa fa-refresh fa-fw"></i>Actualizar
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#" ng-click='eliminaEvento()'>
-                                                <i class="fa fa-check-circle fa-fw"></i>Eliminar
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                
-                            </div>
-                            <br/>
-                            <span class="icon-box bg-color-green set-icon">
-                                <i class="fa fa-desktop"></i>
-                            </span>
-                            <div class="text-box" >
-                                <p class="main-text">%%evento.nombre%%</p>
-                                <p class="text-muted">25 mensajes mostrados</p>
-                                <p class="">Clave del Evento: %%evento.clave%%</p>
-                                <form role="form">
-                                    <div class="form-group" name = 'formAgregarMensaje'>
-                                        <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn-success btn-block" ng-click = 'agregaMensaje(mensaje.descripcion,evento.id,1)'>Agregar</button>
-                                </form>
+                    <div class="panel panel-back noti-box">
+                        
+                        <div>
+                            <div class="btn-group pull-right">
+                                <button type="button" class="btn btn-default btn-xs dropdown-toggle" data-toggle="dropdown">
+                                <i class="fa fa-chevron-down"></i>
+                                </button>
+                                <ul class="dropdown-menu slidedown">
+                                    <li>
+                                        <a href="#" ng-click='cargaMensajeEvento(evento.id)'>
+                                            <i class="fa fa-shield fa-rotate-270"></i> Ver
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)'  target="_blank" >
+                                            <i class="fa fa-flag "></i> Lanzar
+                                        </a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" ng-click='modalActualizaEvento(evento)'>
+                                            <i class="fa fa-refresh fa-fw"></i>Actualizar
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" ng-click='eliminaEvento()'>
+                                            <i class="fa fa-check-circle fa-fw"></i>Eliminar
+                                        </a>
+                                    </li>
+                                </ul>
                             </div>
                         </div>
+                        <br/>
+                        <span class="icon-box bg-color-green set-icon">
+                            <i class="fa fa-desktop"></i>
+                        </span>
+                        <div class="text-box" >
+                            <p class="main-text">%%evento.nombre%%</p>
+                            <p class="text-muted">25 mensajes mostrados</p>
+                            <p class="">Clave del Evento: %%evento.clave%%</p>
+                            <form role="form">
+                                <div class="form-group" name = 'formAgregarMensaje'>
+                                    <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success btn-block" ng-click = 'agregaMensaje(mensaje.descripcion,evento.id,1)'>Agregar</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-8 ">
                     <div class="chat-panel panel panel-default chat-boder chat-panel-head" >
@@ -105,8 +102,12 @@
                                                 %%mensaje.descripcion%%
                                             </p>
                                             <br/>
-                                            <button type="submit" class="btn btn-primary btn-xs " ng-click="modalActualizaMensaje(mensaje)">Actualizar</button>
-                                            <button type="submit" class="btn btn-danger btn-xs" ng-click="eliminaMensaje(mensaje)">Eliminar</button>
+                                            <a href="" ng-click="modalActualizaMensaje(mensaje)"><i class="fa fa-pencil fa-fw " > </i> Edit</a>
+                                            <a href="" ng-click="eliminaMensaje(mensaje)"><i class="fa fa-trash-o fa-fw " ></i> Delete</a>
+                                            <small class="pull-right text-muted">
+                                                <i class="fa fa-eye fa-fw"></i> Visto 5
+                                                <i class="fa fa-list fa-fw"></i> Posición 5
+                                            </small>
                                         </div>
                                     </li>
                                 </div>

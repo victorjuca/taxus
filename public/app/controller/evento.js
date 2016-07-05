@@ -18,7 +18,7 @@ app.controller('eventoCRUDController', ['$scope', '$http', function($scope, $htt
 app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $http) {
 
 
-	adminSocket();
+	//adminSocket();
 	var tipoCrud = 0;
 	cargaEventos($scope, $http);
 	$scope.lanzamodal = function() {

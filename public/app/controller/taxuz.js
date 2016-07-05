@@ -8,16 +8,11 @@ app.config(function($interpolateProvider) {
 
 app.controller('taxuzController', ['$scope', '$http', function($scope, $http) {
 
-	socket();
+	//socket();
 
 	var eventoid = document.getElementById("eventoid").value;
 
 	cargarMenesajes($scope, $http, eventoid);
-
-	$scope.siguiente = function(){
-		next(5);
-	}
-
 
 }]);
 
@@ -64,41 +59,41 @@ function cargarMenesajes(scope, http, eventoid) {
 
 }
 
-function siguientex(){
-var txt = $('#txtlzr'); // The container in which to render the list	
-txt.on('textualizer.changed', function(event, args) {
-  // check if it's the last index in the array
-  if (args.index === LAST_INDEX) {
-    txt.textualizer('pause');
-  }
-});
+function siguientex() {
+	var txt = $('#txtlzr'); // The container in which to render the list	
+	txt.on('textualizer.changed', function(event, args) {
+		// check if it's the last index in the array
+		if (args.index === LAST_INDEX) {
+			txt.textualizer('pause');
+		}
+	});
 
-txt.textualizer('start');	
+	txt.textualizer('start');
 }
 
 
-function socket(){
-    var host = 'ws://127.0.0.1:9000';
-    var socket = null;
-    try {
-        socket = new WebSocket(host);
-        
-        //Manages the open event within your client code
-        socket.onopen = function () {
-            console.log('Conección Abierta con ' + host);
-            return;
-        };
-        //Manages the message event within your client code
-        socket.onmessage = function (msg) {
-            console.log('Mensaje Taxuz: '+msg.data);
-            return;
-        };
-        //Manages the close event within your client code
-        socket.onclose = function () {
-            console.log('Conección Cerrada con ' + host);
-            return;
-        };
-    } catch (e) {
-        console.log(e);
-    }	
+function socket() {
+	var host = 'ws://127.0.0.1:9000';
+	var socket = null;
+	try {
+		socket = new WebSocket(host);
+
+		//Manages the open event within your client code
+		socket.onopen = function() {
+			console.log('Conección Abierta con ' + host);
+			return;
+		};
+		//Manages the message event within your client code
+		socket.onmessage = function(msg) {
+			console.log('Mensaje Taxuz: ' + msg.data);
+			return;
+		};
+		//Manages the close event within your client code
+		socket.onclose = function() {
+			console.log('Conección Cerrada con ' + host);
+			return;
+		};
+	} catch (e) {
+		console.log(e);
+	}
 }
