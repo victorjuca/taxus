@@ -46,7 +46,61 @@ class MensajeController extends Controller
         $mensaje->hora = $request->input('hora');
         $mensaje->eventoid = $request->input('eventoid');
 
-        $mensaje->save();
+        $lmensaje = DB::table('mensaje')
+            ->where('eventoid', '=', $mensaje->eventoid)
+            ->where('descripcion', '=', $mensaje->descripcion)
+            ->get();    
+
+
+
+        $msj = "";
+        $estado = 0;
+        if(count($lmensaje)>0){
+            $msj = "Ya se registro ese mensaje con anteoridad.";
+            $estado = 1;
+        }else{
+            $msj = "Se registro correctamente el Mensaje.";
+            $mensaje->save();    
+        }
+
+         $retorno = array(
+            "estado"  => $estado,
+            "descripcion" => $msj,
+            "id" => 0        
+            );        
+
+        return compact("retorno");
+    }
+
+    public function contvistomensaje(Request $request){
+
+        
+        $eventoid = $request->input('eventoid');
+        $descripcion = $request->input('descripcion');
+        $hora = $request->input('hora');
+        $fecha = $request->input('fecha');
+
+        $lmensaje = DB::table('mensaje')
+            ->where('eventoid', '=', $eventoid)
+            ->where('descripcion', '=', $descripcion)
+            ->get();
+
+        for ($i = 0; $i <= count($lmensaje); $i++) {
+
+
+
+            $mensaje = $lmensaje[$i];
+            $mensaje->visto = ($mensaje->visto + 1) ;
+            $mensaje->save();
+        }        
+
+        $lmensaje = DB::table('mensaje')
+            ->where('eventoid', '=', $eventoid)
+            ->where('descripcion', '=', $descripcion)
+            ->where('fecha', '>', $fecha)
+            ->where('hora', '>', $hora)
+            ->get();          
+        return compact('lmensaje');  
     }
 
     /**

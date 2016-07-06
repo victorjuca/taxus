@@ -18,6 +18,7 @@ class Mensaje extends Migration
             $table->string('descripcion');
             $table->date('fecha');
             $table->dateTime('hora');
+            $table->integer('visto');
             $table->integer('eventoid')->unsigned();
             $table->foreign('eventoid')->references('id')->on('evento');            
         });

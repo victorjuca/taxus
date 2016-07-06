@@ -51,13 +51,20 @@ function cargarMenesajes(scope, http, eventoid) {
 
 		txt.textualizer(ldescripcion, options); // textualize it!
 		txt.textualizer('start'); // start
-
+		txt.on('textualizer.changed', function(event, args) {
+			// check if it's the last index in the array
+			if (args.index === LAST_INDEX) {
+				txt.textualizer('pause');
+			}
+		});
 		//alertify.success('Se cargaron correctamente los mensajes del evento.');
 	}).error(function(response) {
 		alertify.error("Ocurrió un error al tratar de cargar los mensajes del evento.");
 	});
 
 }
+
+
 
 function siguientex() {
 	var txt = $('#txtlzr'); // The container in which to render the list	

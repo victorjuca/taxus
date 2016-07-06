@@ -185,11 +185,16 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 				'X-CSRF-TOKEN': $scope.token
 			}
 		}).success(function(response) {
-			alertify.success("Se agregó correctamente el mensaje.");
+
+			if(response.estado == 0){
+				alertify.success(response.descripcion);			
+			}else{
+				alertify.error(response.descripcion);				
+			}
+
 			document.getElementById("mensaje").value = '';
 			cargarMenesajes($scope, $http, eventoid);
 			$scope.mensaje ='';
-			socket.send(descripcion);
 		}).error(function(response) {
 			alertify.error("Ocurrió un error al agregar el mensaje.");
 		})
