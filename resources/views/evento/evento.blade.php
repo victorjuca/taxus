@@ -101,7 +101,6 @@
                                             <p>
                                                 %%mensaje.descripcion%%
                                             </p>
-                                            <br/>
                                             <a href="" ng-click="modalActualizaMensaje(mensaje)"><i class="fa fa-pencil fa-fw " > </i> Edit</a>
                                             <a href="" ng-click="eliminaMensaje(mensaje)"><i class="fa fa-trash-o fa-fw " ></i> Delete</a>
                                             <small class="pull-right text-muted">
