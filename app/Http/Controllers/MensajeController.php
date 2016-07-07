@@ -104,19 +104,20 @@ class MensajeController extends Controller
                 ->where('descripcion', '=', $descripcion)
                 ->get();    
             for ($j = 0; $j <= count($lmensajebd); $j++) {
+
                 $mensaje = Mensaje::find($lmensajebd[0]->id);
-                $mensaje->visto = $mensaje->visto + 1;
+
+                $cont = $mensaje->visto + 1;
+
+                $mensaje->visto = $cont;
                 $mensaje->save();
             }         
             
             
         }        
 
-        $lmensajenuevo = DB::table('mensaje')
-            ->where('eventoid', '=', $eventoid)
-            ->orderBy('vistas')
-            ->get();   
-        return compact('lmensajenuevo');  
+        $lmensajenuevo = DB::table('mensaje')->where('eventoid', '=', $eventoid)->orderBy('visto','asc')->get();   
+        return $lmensajenuevo;  
     }
 
     /**
@@ -127,7 +128,7 @@ class MensajeController extends Controller
      */
     public function show($eventoid)
     {
-        $lmensaje = DB::table('mensaje')->where('eventoid', '=', $eventoid)->orderBy('hora','desc')->get();
+        $lmensaje = DB::table('mensaje')->where('eventoid', '=', $eventoid)->orderBy('visto','asc')->get();
 
         return $lmensaje;
     }

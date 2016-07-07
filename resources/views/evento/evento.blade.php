@@ -39,12 +39,12 @@
                                 </button>
                                 <ul class="dropdown-menu slidedown">
                                     <li>
-                                        <a href="#" ng-click='cargaMensajeEvento(evento.id)'>
-                                            <i class="fa fa-shield fa-rotate-270"></i> Ver
+                                        <a ng-click='cargaMensajeEvento(evento.id)'>
+                                            <i class="fa fa-shield fa-rotate-270"></i> Refrescar
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/taxuz/%%evento.id%%" ng-click='cargaMensajeEvento(evento.id)'  target="_blank" >
+                                        <a href="/taxuz/%%evento.id%%" target="_blank" >
                                             <i class="fa fa-flag "></i> Lanzar
                                         </a>
                                     </li>
@@ -104,8 +104,8 @@
                                             <a href="" ng-click="modalActualizaMensaje(mensaje)"><i class="fa fa-pencil fa-fw " > </i> Edit</a>
                                             <a href="" ng-click="eliminaMensaje(mensaje)"><i class="fa fa-trash-o fa-fw " ></i> Delete</a>
                                             <small class="pull-right text-muted">
-                                                <i class="fa fa-eye fa-fw"></i> Visto 5
-                                                <i class="fa fa-list fa-fw"></i> Posición 5
+                                                <i class="fa fa-eye fa-fw"></i> Visto %%mensaje.visto%%
+                                                
                                             </small>
                                         </div>
                                     </li>

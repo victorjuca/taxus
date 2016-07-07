@@ -18,12 +18,13 @@ app.controller('taxuzController', ['$scope', '$http', function($scope, $http) {
 
 var arreglo;
 
-		var options = {
-			duration: 250, // Time (ms) each blurb will remain on screen
-			rearrangeDuration: 250, // Time (ms) a character takes to reach its position
-			effect: 'random', // Animation effect the characters use to appear
-			centered: true // Centers the text relative to its container
-		}
+var options = {
+	duration: 5000, // Time (ms) each blurb will remain on screen
+	rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
+	effect: 'random', // Animation effect the characters use to appear
+	centered: true // Centers the text relative to its container
+}
+
 function cargarMenesajes(scope, http, eventoid) {
 	http({
 		method: 'GET',
@@ -33,84 +34,87 @@ function cargarMenesajes(scope, http, eventoid) {
 			'X-CSRF-TOKEN': scope.token
 		}
 	}).success(function(response) {
-		scope.lmensaje = response;
 
 		var lmensaje = response;
-		var ldescripcion = [];
 
-		for (x = 0; x < lmensaje.length; x++) {
-			var mensaje = lmensaje[x];
-			ldescripcion.push(mensaje.descripcion);
-		}
+		ldescripcion = convertirListDescripcion(lmensaje);
 
-
-		reiniciaMensaje(ldescripcion,scope, http)
-		//alertify.success('Se cargaron correctamente los mensajes del evento.');
+		reiniciaMensaje(ldescripcion, eventoid, scope, http)
+			//alertify.success('Se cargaron correctamente los mensajes del evento.');
 	}).error(function(response) {
 		alertify.error("Ocurrió un error al tratar de cargar los mensajes del evento.");
 	});
+}
+
+function convertirListDescripcion(lmensaje) {
+	var ldescripcion = [];
+
+	for (x = 0; x < lmensaje.length; x++) {
+		var mensaje = lmensaje[x];
+		ldescripcion.push(mensaje.descripcion);
+	}
+
+	return ldescripcion;
 
 }
 
 
-function reiniciaMensaje(ldescripcion,scope, http){
-		var noMensajes = 1; // Numero de mensajes que se ejecutaran antes de traer mas
-		var contRepr = 1; // Contador de repeticiones.
-		var lmensajes = new Array(); // Lista de mensajes guardados.
+function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
+	var noMensajes = 1; // Numero de mensajes que se ejecutaran antes de traer mas
+	var contRepr = 1; // Contador de repeticiones.
+	var lmensajes = new Array(); // Lista de mensajes guardados.
 
-		var txt = $('#txtlzr'); // The container in which to render the list
-		txt.textualizer(ldescripcion, options); // textualize it!
-		txt.textualizer('start'); // start
-		txt.on('textualizer.changed', function(event, args) {
+	var txt = $('#txtlzr'); // The container in which to render the list
+	txt.textualizer(ldescripcion, options); // textualize it!
+	txt.textualizer('start'); // start
+	txt.on('textualizer.changed', function(event, args) {
 
-			lmensajes.push(ldescripcion[args.index]);
+		lmensajes.push(ldescripcion[args.index]);
 
-			if(noMensajes == contRepr){
+		if (noMensajes == contRepr) {
 
-				/**
-				 * Envia los mensajes para ponerle el contador de visto.
-				*/
-				scope.contmensaje = {};
+			/**
+			 * Envia los mensajes para ponerle el contador de visto.
+			 */
+			scope.contmensaje = {};
 
-				scope.contmensaje.lmensaje = lmensajes;
-				scope.contmensaje.eventoid = eventoid;
-				scope.contmensaje.fecha = getFechaActual();
-				scope.contmensaje.hora = getHoraActual();
-
-				http({
-					method: 'put',
-					url: '/cuentamensaje',
-					data: $.param(scope.contmensaje),
-					headers: {
-						'Content-Type': 'application/x-www-form-urlencoded',
-						'X-CSRF-TOKEN': scope.token
-					}
-				}).success(function(response) {
+			scope.contmensaje.lmensaje = lmensajes;
+			scope.contmensaje.eventoid = eventoid;
+			scope.contmensaje.fecha = getFechaActual();
+			scope.contmensaje.hora = getHoraActual();
 
 
-					/**
-					 Recarga los mensajes ordenados.
-					*/
-					var lmensajer = response;
+			http({
+				method: 'put',
+				url: '/cuentamensaje',
+				data: $.param(scope.contmensaje),
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'X-CSRF-TOKEN': scope.token
+				}
+			}).success(function(response) {
+				var lmensaje = response;
 
-					var ldescr = {}; 
+				var ldescnueva = convertirListDescripcion(lmensaje);
 
-					for (x = 0; x < lmensaje.length; x++) {
-						var mensaje = lmensaje[x];
-						ldescr.push(mensaje.descripcion);
-					}					
-					reiniciaMensaje(ldescr,scope, http);
-				});
-				contRepr = 0;
-				lmensajes = new Array();
+				var txt = $('#txtlzr'); // The container in which to render the list
+				txt.textualizer(ldescnueva, options); // textualize it!
+				txt.textualizer('start'); // start		
+
+				ldescripcion = ldescnueva;
+			}).error(function(response) {});
+
+			contRepr = 0;
+			lmensajes = new Array();
 
 
-			}
+		}
 
-			contRepr++;
+		contRepr++;
 
-		});
+	});
 }
+
 
 function socket() {
 	var host = 'ws://127.0.0.1:9000';
