@@ -450,6 +450,12 @@ THE SOFTWARE.
             next(index);
         };
 
+        this.reset = function(){
+            list = [];
+            snippets = [];           
+            index = 0;
+        }
+
         this.destroy = function () {
             $container.parent().removeData('textualizer').end().remove();
 

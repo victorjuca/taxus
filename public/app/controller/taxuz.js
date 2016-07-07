@@ -60,7 +60,7 @@ function convertirListDescripcion(lmensaje) {
 
 
 function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
-	var noMensajes = 1; // Numero de mensajes que se ejecutaran antes de traer mas
+	var noMensajes = 3; // Numero de mensajes que se ejecutaran antes de traer mas
 	var contRepr = 1; // Contador de repeticiones.
 	var lmensajes = new Array(); // Lista de mensajes guardados.
 
@@ -97,11 +97,12 @@ function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
 
 				var ldescnueva = convertirListDescripcion(lmensaje);
 
-				var txt = $('#txtlzr'); // The container in which to render the list
 				txt.textualizer(ldescnueva, options); // textualize it!
+				txt.textualizer('data', ldescnueva); // start	
 				txt.textualizer('start'); // start		
 
 				ldescripcion = ldescnueva;
+
 			}).error(function(response) {});
 
 			contRepr = 0;
