@@ -67,7 +67,12 @@ class MensajeController extends Controller
 
         return compact("retorno");
     }
-
+    /**
+     * Store a newly update resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function validaMensajeInsertado($eventoid, $descripcion){
         $lmensaje = DB::table('mensaje')
             ->where('eventoid', '=', $eventoid)
@@ -85,31 +90,33 @@ class MensajeController extends Controller
 
         
         $eventoid = $request->input('eventoid');
-        $descripcion = $request->input('descripcion');
+        $ldescripcion = $request->input('lmensaje');
+        $fecha  = $request->input('fecha');
         $hora = $request->input('hora');
-        $fecha = $request->input('fecha');
 
-        $lmensaje = DB::table('mensaje')
-            ->where('eventoid', '=', $eventoid)
-            ->where('descripcion', '=', $descripcion)
-            ->get();
+         
 
-        for ($i = 0; $i <= count($lmensaje); $i++) {
+        for ($i = 0; $i <= count($ldescripcion); $i++) {
+            $descripcion = $ldescripcion[0];
 
-
-
-            $mensaje = $lmensaje[$i];
-            $mensaje->visto = ($mensaje->visto + 1) ;
-            $mensaje->save();
+            $lmensajebd = DB::table('mensaje')
+                ->where('eventoid', '=', $eventoid)
+                ->where('descripcion', '=', $descripcion)
+                ->get();    
+            for ($j = 0; $j <= count($lmensajebd); $j++) {
+                $mensaje = Mensaje::find($lmensajebd[0]->id);
+                $mensaje->visto = $mensaje->visto + 1;
+                $mensaje->save();
+            }         
+            
+            
         }        
 
-        $lmensaje = DB::table('mensaje')
+        $lmensajenuevo = DB::table('mensaje')
             ->where('eventoid', '=', $eventoid)
-            ->where('descripcion', '=', $descripcion)
-            ->where('fecha', '>', $fecha)
-            ->where('hora', '>', $hora)
-            ->get();          
-        return compact('lmensaje');  
+            ->orderBy('vistas')
+            ->get();   
+        return compact('lmensajenuevo');  
     }
 
     /**

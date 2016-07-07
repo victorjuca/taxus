@@ -21,5 +21,5 @@ Route::get('getallevento', 'EventoController@allEvento');
 
 Route::get('taxuz/{eventoid}', 'EventoController@lanzataxuz');
 Route::resource('mensaje', 'MensajeController');
-Route::post('cuentamensaje', 'MensajeController@contvistomensaje');
+Route::put('cuentamensaje', 'MensajeController@contvistomensaje');
 
