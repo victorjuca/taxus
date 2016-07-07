@@ -39,11 +39,14 @@ function cargarMenesajes(scope, http, eventoid) {
 		}
 
 
+		var noMensajes = 1; // Numero de mensajes que se ejecutaran antes de traer mas
+		var contRepr = 0; // Contador de repeticiones.
+		var lmensajes = new Array(); // Lista de mensajes guardados.
 
 		var txt = $('#txtlzr'); // The container in which to render the list
 
 		var options = {
-			duration: 10000, // Time (ms) each blurb will remain on screen
+			duration: 2000, // Time (ms) each blurb will remain on screen
 			rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
 			effect: 'random', // Animation effect the characters use to appear
 			centered: true // Centers the text relative to its container
@@ -52,10 +55,22 @@ function cargarMenesajes(scope, http, eventoid) {
 		txt.textualizer(ldescripcion, options); // textualize it!
 		txt.textualizer('start'); // start
 		txt.on('textualizer.changed', function(event, args) {
-			// check if it's the last index in the array
-			if (args.index === LAST_INDEX) {
-				txt.textualizer('pause');
+
+			lmensajes.push(ldescripcion[args.index]);
+
+			if(noMensajes == contRepr){
+				scope.contmensaje = [];
+
+				scope.contmensaje.lmensaje = lmensajes;
+				scope.contmensaje.eventoid = eventoid;
+
+				enviaContMensaje(scope, http);
+				contRepr = 0;
+				lmensajes = new Array();
 			}
+
+			contRepr++;
+
 		});
 		//alertify.success('Se cargaron correctamente los mensajes del evento.');
 	}).error(function(response) {
@@ -64,6 +79,23 @@ function cargarMenesajes(scope, http, eventoid) {
 
 }
 
+function enviaContMensaje(scope, http){
+
+		http({
+			method: 'post',
+			url: '/cuentamensaje',
+			data: $.param(scope.contmensaje),
+			headers: {
+				'Content-Type': 'application/x-www-form-urlencoded',
+				'X-CSRF-TOKEN': scope.token
+			}
+		}).success(function(response) {
+			
+		}).error(function(response) {
+
+		});
+
+}
 
 
 function siguientex() {

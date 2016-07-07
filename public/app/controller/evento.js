@@ -186,13 +186,15 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 			}
 		}).success(function(response) {
 
-			if(response.estado == 0){
-				alertify.success(response.descripcion);			
+			var retorno =  response.retorno;
+
+			if(retorno.estado == 0){
+				alertify.success(retorno.descripcion);			
 			}else{
-				alertify.error(response.descripcion);				
+				alertify.error(retorno.descripcion);				
+				document.getElementById("mensaje").value = '';
 			}
 
-			document.getElementById("mensaje").value = '';
 			cargarMenesajes($scope, $http, eventoid);
 			$scope.mensaje ='';
 		}).error(function(response) {

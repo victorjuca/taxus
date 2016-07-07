@@ -46,16 +46,12 @@ class MensajeController extends Controller
         $mensaje->hora = $request->input('hora');
         $mensaje->eventoid = $request->input('eventoid');
 
-        $lmensaje = DB::table('mensaje')
-            ->where('eventoid', '=', $mensaje->eventoid)
-            ->where('descripcion', '=', $mensaje->descripcion)
-            ->get();    
-
-
-
         $msj = "";
         $estado = 0;
-        if(count($lmensaje)>0){
+
+        $insertado = MensajeController::validaMensajeInsertado( $mensaje->eventoid,$mensaje->descripcion);
+
+        if($insertado){
             $msj = "Ya se registro ese mensaje con anteoridad.";
             $estado = 1;
         }else{
@@ -71,6 +67,19 @@ class MensajeController extends Controller
 
         return compact("retorno");
     }
+
+    public function validaMensajeInsertado($eventoid, $descripcion){
+        $lmensaje = DB::table('mensaje')
+            ->where('eventoid', '=', $eventoid)
+            ->where('descripcion', '=', $descripcion)
+            ->get();    
+
+        if(count($lmensaje)>0){
+            return true;
+        }else{
+            return false;
+        }
+    }    
 
     public function contvistomensaje(Request $request){
 
@@ -143,7 +152,27 @@ class MensajeController extends Controller
         $mensaje->hora = $request->input('hora');
         $mensaje->eventoid = $request->input('eventoid');
 
-        $mensaje->save();        
+        $insertado = MensajeController::validaMensajeInsertado( $mensaje->eventoid,$mensaje->descripcion);
+
+        $msj = "";
+        $estado = 0;
+
+        if($insertado){
+            $msj = "Ya se registro ese mensaje con anteoridad.";
+            $estado = 1;
+        }else{
+            $msj = "Se registro correctamente el Mensaje.";
+            $mensaje->save();    
+        }
+
+
+         $retorno = json_encode(array(
+            "estado"  => $estado,
+            "descripcion" => $msj,
+            "id" => 0        
+            ));        
+
+         return compact('retorno');
     }
 
     /**
