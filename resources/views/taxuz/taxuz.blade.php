@@ -22,11 +22,12 @@ margin: auto;
   <div ng-controller="taxuzController">
     <input type="hidden" name="" id="eventoid" value="{{$eventoid}}" ng-model = "eventoid">
 
-        <input type="hidden" name="_token" value="{{csrf_token()}}" id="token" ng-model="token"/>
+        
         <div id="fullscreen">
                   <a href="#" class="requestfullscreen">Click to open it in fullscreen</a>
           <a href="#" class="exitfullscreen" style="display: none">Click to exit fullscreen</a>.</p>
            <button type="button" class="btn btn-success pull-lefth"  ng-click="siguiente()">Siguiente</button>
+           <input type="hidden" name="_token" value="{{csrf_token()}}" id="token" ng-model="token"/>
         <div id="txtlzr">
         </div>
         </div>

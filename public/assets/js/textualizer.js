@@ -450,10 +450,13 @@ THE SOFTWARE.
             next(index);
         };
 
-        this.reset = function(){
-            list = [];
-            snippets = [];           
-            index = 0;
+        this.updatelist = function(dataSource){
+            list = dataSource;
+            snippets = [];  
+            index = 0;            
+            previous = null;
+            $container.empty();
+            $phantomContainer.empty();            
         }
 
         this.destroy = function () {

@@ -50,15 +50,20 @@
                                     </li>
                                     <li class="divider"></li>
                                     <li>
-                                        <a href="#" ng-click='modalActualizaEvento(evento)'>
+                                        <a ng-click='modalActualizaEvento(evento)'>
                                             <i class="fa fa-refresh fa-fw"></i>Actualizar
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#" ng-click='eliminaEvento()'>
+                                        <a ng-click='eliminaEvento()'>
                                             <i class="fa fa-check-circle fa-fw"></i>Eliminar
                                         </a>
                                     </li>
+                                    <li>
+                                        <a ng-click='reiniciaContMensaje(evento.id)'>
+                                            <i class="fa fa-check-circle fa-fw"></i> Reinicia Contador
+                                        </a>
+                                    </li>                                    
                                 </ul>
                             </div>
                         </div>

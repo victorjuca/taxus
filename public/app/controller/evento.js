@@ -245,6 +245,29 @@ app.controller('eventoAdmonController', ['$scope', '$http', function($scope, $ht
 
 	}
 
+	$scope.reiniciaContMensaje = function(eventoid){
+		alertify.confirm("¿Deseas reiniciar los contadores de los mensjes?", function(e) {
+			if (e) {
+			$http({
+				method: 'get',
+				url: '/restcontmensaje/' + eventoid,
+				headers: {
+					'Content-Type': 'application/x-www-form-urlencoded',
+					'X-CSRF-TOKEN': $scope.token
+				}
+			}).success(function(response) {
+				mensaje = 'Se reiniciarón los contadores correctamente.';
+				alertify.success(mensaje);			
+				cargarMenesajes($scope, $http, eventoid);
+			}).error(function(response) {
+				mensaje = 'Ocurrió un error al reiniciar los contadores.';
+				alertify.error(mensaje);			
+				cargarMenesajes($scope, $http, eventoid);
+			});
+			}
+		});
+	}
+
 }]);
 
 function validaMensaje(mensaje) {

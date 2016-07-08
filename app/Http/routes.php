@@ -22,4 +22,5 @@ Route::get('getallevento', 'EventoController@allEvento');
 Route::get('taxuz/{eventoid}', 'EventoController@lanzataxuz');
 Route::resource('mensaje', 'MensajeController');
 Route::put('cuentamensaje', 'MensajeController@contvistomensaje');
+Route::get('restcontmensaje/{eventoid}', 'MensajeController@reiniciContadoMensaje');
 

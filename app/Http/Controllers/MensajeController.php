@@ -86,6 +86,14 @@ class MensajeController extends Controller
         }
     }    
 
+    public function reiniciContadoMensaje($eventoid){
+        DB::table('mensaje')
+                    ->where('eventoid', $eventoid)
+                    ->update(['visto' => 0]);
+
+
+    }
+
     public function contvistomensaje(Request $request){
 
         
@@ -96,16 +104,16 @@ class MensajeController extends Controller
 
          
 
-        for ($i = 0; $i <= count($ldescripcion); $i++) {
-            $descripcion = $ldescripcion[0];
+        for ($i = 0; $i < count($ldescripcion); $i++) {
+            $descripcion = $ldescripcion[$i];
 
             $lmensajebd = DB::table('mensaje')
                 ->where('eventoid', '=', $eventoid)
                 ->where('descripcion', '=', $descripcion)
                 ->get();    
-            for ($j = 0; $j <= count($lmensajebd); $j++) {
+            for ($j = 0; $j < count($lmensajebd); $j++) {
 
-                $mensaje = Mensaje::find($lmensajebd[0]->id);
+                $mensaje = Mensaje::find($lmensajebd[$j]->id);
 
                 $cont = $mensaje->visto + 1;
 

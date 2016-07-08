@@ -98,10 +98,12 @@ function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
 				var ldescnueva = convertirListDescripcion(lmensaje);
 
 				txt.textualizer(ldescnueva, options); // textualize it!
-				txt.textualizer('data', ldescnueva); // start	
-				txt.textualizer('start'); // start		
+				txt.textualizer('updatelist', ldescnueva); // start	
+				//txt.textualizer('start'); // start		
 
 				ldescripcion = ldescnueva;
+
+				console.log('Se encarios : ' + ldescripcion);
 
 			}).error(function(response) {});
 
