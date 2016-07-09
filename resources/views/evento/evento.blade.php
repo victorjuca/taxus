@@ -61,7 +61,7 @@
                                     </li>
                                     <li>
                                         <a ng-click='reiniciaContMensaje(evento.id)'>
-                                            <i class="fa fa-check-circle fa-fw"></i> Reinicia Contador
+                                            <i class="fa fa-retweet fa-fw"></i> Reinicia Contador
                                         </a>
                                     </li>                                    
                                 </ul>
@@ -77,7 +77,10 @@
                             <p class="">Clave del Evento: %%evento.clave%%</p>
                             <form role="form">
                                 <div class="form-group" name = 'formAgregarMensaje'>
-                                    <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion' ></textarea>
+                                    <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion'
+                                    ></textarea>
+                                     <span class="form-help">%%200-mensaje.descripcion.length%%        
+   Characters</span>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-block" ng-click = 'agregaMensaje(mensaje.descripcion,evento.id,1)'>Agregar</button>
                             </form>
