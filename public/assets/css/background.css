@@ -1,0 +1,53 @@
+
+body{
+  background: #fdf202;
+    background-color: red;
+    animation-name: example;
+    animation-duration: 240s;
+  
+  	-webkit-animation-iteration-count: infinite;	
+}
+
+#txtlzr {
+text-align: center;
+font-size: 85px;
+width: auto; /* Ancho del Background */
+height: 500px; /* Altura de Backgroud */
+margin-left: 100px;
+margin-top: 50px;
+position: absolute;
+top:0;
+left:50;
+right:50;
+bottom:0;
+margin: auto;
+/**background: #83C24A;*/
+
+}
+
+
+
+
+/* The animation code */
+@keyframes example {
+    0%   {
+    		background-color: #fdf202 ;
+    		color: #000000;
+    		text-shadow: 0.1em 0.1em 0.05em #333
+    	}
+    25%  {
+    		background-color: #2d3393  ;
+    		color: #fdf202;
+    		text-shadow: 0.1em 0.1em 0.05em #334
+    	}
+    50%  {
+    		background-color: #000000;
+    		color: #fdf202 ;
+    		text-shadow: 0.1em 0.1em 0.05em #333
+    	}
+    100% {
+    		background-color: #2d3393  ;
+    		color: #ffffff ;
+    		text-shadow: 0.1em 0.1em 0.05em #333
+    	}
+}

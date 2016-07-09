@@ -19,7 +19,7 @@ app.controller('taxuzController', ['$scope', '$http', function($scope, $http) {
 var arreglo;
 
 var options = {
-	duration: 5000, // Time (ms) each blurb will remain on screen
+	duration: 20000, // Time (ms) each blurb will remain on screen
 	rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
 	effect: 'random', // Animation effect the characters use to appear
 	centered: true // Centers the text relative to its container

@@ -451,8 +451,8 @@ THE SOFTWARE.
         };
 
         this.updatelist = function(dataSource){
-            list = dataSource;
             snippets = [];  
+            list = dataSource;            
             index = 0;            
             previous = null;
             $container.empty();
