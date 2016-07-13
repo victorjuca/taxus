@@ -80,7 +80,7 @@
                                     <textarea class="form-control" id="mensaje" rows="3" ng-model = 'mensaje.descripcion'
                                     ></textarea>
                                      <span class="form-help">%%200-mensaje.descripcion.length%%        
-   Characters</span>
+   Caractere(s)</span>
                                 </div>
                                 <button type="submit" class="btn btn-success btn-block" ng-click = 'agregaMensaje(mensaje.descripcion,evento.id,1)'>Agregar</button>
                             </form>

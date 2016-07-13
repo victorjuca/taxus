@@ -456,7 +456,11 @@ THE SOFTWARE.
             index = 0;            
             previous = null;
             $container.empty();
-            $phantomContainer.empty();            
+            $phantomContainer.empty();   
+
+            playing = true;
+            paused = false;
+            next(index);
         }
 
         this.destroy = function () {

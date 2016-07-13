@@ -19,7 +19,8 @@ app.controller('taxuzController', ['$scope', '$http', function($scope, $http) {
 var arreglo;
 
 var options = {
-	duration: 60000, // Time (ms) each blurb will remain on screen
+	//duration: 60000, // Time (ms) each blurb will remain on screen
+	duration: 1000, // Time (ms) each blurb will remain on screen
 	rearrangeDuration: 1000, // Time (ms) a character takes to reach its position
 	effect: 'random', // Animation effect the characters use to appear
 	centered: true // Centers the text relative to its container
@@ -60,8 +61,9 @@ function convertirListDescripcion(lmensaje) {
 
 
 function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
-	var noMensajes = 3; // Numero de mensajes que se ejecutaran antes de traer mas
+	var noMensajes = 2; // Numero de mensajes que se ejecutaran antes de traer mas
 	var contRepr = 1; // Contador de repeticiones.
+	var contIdice = 0;
 	var lmensajes = new Array(); // Lista de mensajes guardados.
 
 	var txt = $('#txtlzr'); // The container in which to render the list
@@ -69,10 +71,10 @@ function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
 	txt.textualizer('start'); // start
 	txt.on('textualizer.changed', function(event, args) {
 
-		lmensajes.push(ldescripcion[args.index]);
+		lmensajes.push(ldescripcion[contIdice]);
 
 		if (noMensajes == contRepr) {
-
+			
 			/**
 			 * Envia los mensajes para ponerle el contador de visto.
 			 */
@@ -107,13 +109,15 @@ function reiniciaMensaje(ldescripcion, eventoid, scope, http) {
 
 			}).error(function(response) {});
 
-			contRepr = 0;
+			contRepr = 1;
 			lmensajes = new Array();
-
-
+			contIdice = 0;
+		}else{
+		contRepr++;
+		contIdice++;			
 		}
 
-		contRepr++;
+
 
 	});
 }
