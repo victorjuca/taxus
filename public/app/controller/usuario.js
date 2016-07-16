@@ -6,7 +6,7 @@ app.config(function($interpolateProvider) {
 
 
 
-app.controller('loginController', ['$scope', function($scope) {
+app.controller('loginController', ['$scope', '$http', function($scope, $http) {
 
 	$scope.mostramodalrecuperacuenta = function() {
 		$('#modalRecuperaCuenta').modal('show');
@@ -14,7 +14,9 @@ app.controller('loginController', ['$scope', function($scope) {
 
 }]);
 
-app.controller('crearUsuarioController', ['$scope', function($scope) {
+app.controller('crearUsuarioController', ['$scope', '$http', function($scope, $http) {
+
+	
 
 }]);
 

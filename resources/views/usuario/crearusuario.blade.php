@@ -16,19 +16,19 @@
                                 <form role="form">
                                     <div class="form-group">
                                         <label>Nombre</label>
-                                        <input type="text" class="form-control" />
+                                        <input type="text" class="form-control" ng-model="usuario.nombre"/>
                                     </div>
                                     <div class="form-group">
                                         <label>Correo</label>
-                                        <input type="text" class="form-control" />
+                                        <input type="text" class="form-control" ng-model="usuario.correo"/>
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Contraseña</label>
-                                        <input type="pasword" class="form-control" />
+                                        <input type="password" class="form-control" ng-model="usuario.contrasena"/>
                                     </div>                                    
                                     <div class="form-group">
                                         <label>Reafirma Contraseña</label>
-                                        <input type="password" class="form-control" />
+                                        <input type="password" class="form-control" ng-model="usuario.confirContrasena"/>
                                     </div>  
                                     <button type="submit" class="btn btn-default">Guardar</button>
                                 </form>
